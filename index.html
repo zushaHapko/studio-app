@@ -3,759 +3,2359 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Hevy Pasztell - Személyi Edző Stúdió</title>
+    <title>Hevy × Pasztell Edzői Stúdió – Kliens & Edzéskövető</title>
     
-    <!-- PWA / Mobile App Meta Tagek -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="EdzőApp">
-    <meta name="theme-color" content="#8DA399">
+    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Beágyazott Dinamikus PWA Ikon (SVG Data URI) -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='110' fill='%238DA399'/%3E%3Cpath d='M110 230h40v52h-40zM362 230h40v52h-40zM140 210h56v92h-56zM316 210h56v92h-56zM70 245h50v22H70zM392 245h50v22h-50zM180 185h152v142H180z' fill='%23FAF8F5'/%3E%3C/svg%3E">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='110' fill='%238DA399'/%3E%3Cpath d='M110 230h40v52h-40zM362 230h40v52h-40zM140 210h56v92h-56zM316 210h56v92h-56zM70 245h50v22H70zM392 245h50v22h-50zM180 185h152v142H180z' fill='%23FAF8F5'/%3E%3C/svg%3E">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- FontAwesome Ikonok -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        theme: {
+                            bg: 'var(--bg-main)',
+                            card: 'var(--bg-card)',
+                            subtle: 'var(--bg-subtle)',
+                            primary: 'var(--color-primary)',
+                            primaryDark: 'var(--color-primary-dark)',
+                            primarySoft: 'var(--color-primary-soft)',
+                            accent: 'var(--color-accent)',
+                            accentSoft: 'var(--color-accent-soft)',
+                            text: 'var(--text-main)',
+                            muted: 'var(--text-muted)',
+                            border: 'var(--border-color)'
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 6px 24px -4px rgba(30, 35, 40, 0.05)',
+                        'card': '0 4px 16px -2px rgba(30, 35, 40, 0.04)',
+                        'float': '0 10px 30px -5px rgba(30, 35, 40, 0.14)'
+                    }
+                }
+            }
+        }
+    </script>
 
     <style>
-        /* Alapértelmezett Pasztell Téma (Zsálya & Barack) */
-        :root {
+        /* VÁLTOZTATHATÓ PASZTELL TÉMÁK (CSS VÁLTOZÓKKAL) */
+        :root, [data-theme="sage"] {
             --bg-main: #FAF8F5;
-            --card-bg: #FFFFFF;
-            --text-main: #2C3531;
-            --text-muted: #707C76;
-            --primary: #8DA399;
-            --primary-hover: #7A9086;
-            --accent: #E8B4A2;
-            --border-color: #EAE6DF;
+            --bg-card: #FFFFFF;
+            --bg-subtle: #F2EFE9;
+            --color-primary: #7C968B;
+            --color-primary-dark: #637D72;
+            --color-primary-soft: #E9F0ED;
+            --color-accent: #E6A995;
+            --color-accent-soft: #FCF0EC;
+            --text-main: #2F3331;
+            --text-muted: #7C827E;
+            --border-color: #EAE5DC;
+            --outer-bg: #EBE6DD;
         }
 
-        /* 1. Púder & Mályva (Nőies) */
-        body.theme-puder {
-            --bg-main: #FCF9FA;
-            --card-bg: #FFFFFF;
-            --text-main: #3E3236;
-            --text-muted: #8C787E;
-            --primary: #D4A5B8;
-            --primary-hover: #C291A5;
-            --accent: #E2C4B9;
-            --border-color: #F0E4E8;
+        [data-theme="mauve"] {
+            --bg-main: #FCF7F8;
+            --bg-card: #FFFFFF;
+            --bg-subtle: #F6ECEE;
+            --color-primary: #B87D8B;
+            --color-primary-dark: #9D6270;
+            --color-primary-soft: #F7EAED;
+            --color-accent: #E5B4BE;
+            --color-accent-soft: #FDF2F4;
+            --text-main: #382B2E;
+            --text-muted: #8A767B;
+            --border-color: #EFE0E3;
+            --outer-bg: #EFE2E5;
         }
 
-        /* 2. Pala & Kékesszürke (Férfiasabb) */
-        body.theme-pala {
-            --bg-main: #F4F6F8;
-            --card-bg: #FFFFFF;
-            --text-main: #222B32;
-            --text-muted: #6C7A84;
-            --primary: #5A738E;
-            --primary-hover: #4A607A;
-            --accent: #8FA3B8;
-            --border-color: #E2E8EE;
+        [data-theme="slate"] {
+            --bg-main: #F3F5F7;
+            --bg-card: #FFFFFF;
+            --bg-subtle: #E6EBEF;
+            --color-primary: #5B7387;
+            --color-primary-dark: #455B6E;
+            --color-primary-soft: #E4ECF2;
+            --color-accent: #8EAAB8;
+            --color-accent-soft: #EDF3F6;
+            --text-main: #242E36;
+            --text-muted: #6C7A86;
+            --border-color: #DCE3E9;
+            --outer-bg: #DFE5EB;
         }
 
-        /* 3. Homok & Terrakotta (Meleg) */
-        body.theme-homok {
-            --bg-main: #FBF9F5;
-            --card-bg: #FFFFFF;
-            --text-main: #332C27;
-            --text-muted: #85786E;
-            --primary: #C28E6F;
-            --primary-hover: #B07D5E;
-            --accent: #D4B59D;
-            --border-color: #EFEADF;
+        [data-theme="terracotta"] {
+            --bg-main: #F9F5F0;
+            --bg-card: #FFFFFF;
+            --bg-subtle: #EFE8DF;
+            --color-primary: #B87B5E;
+            --color-primary-dark: #9C6247;
+            --color-primary-soft: #F5EAE4;
+            --color-accent: #DFB296;
+            --color-accent-soft: #FAF1EB;
+            --text-main: #362C26;
+            --text-muted: #85766D;
+            --border-color: #E8DFD5;
+            --outer-bg: #EAE0D5;
         }
 
         body {
-            background-color: var(--bg-main);
+            background-color: var(--outer-bg);
             color: var(--text-main);
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
             -webkit-tap-highlight-color: transparent;
         }
 
-        .custom-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
+        .app-shell {
+            background-color: var(--bg-main);
+            min-height: 100vh;
+            min-height: 100dvh;
+            transition: background-color 0.3s ease;
         }
 
-        .btn-primary {
-            background-color: var(--primary);
-            color: #FFFFFF;
-            transition: all 0.2s;
-        }
-        .btn-primary:hover {
-            background-color: var(--primary-hover);
-        }
-
-        .accent-bg { background-color: var(--accent); }
-        .text-primary-custom { color: var(--primary); }
-        .border-custom { border-color: var(--border-color); }
-
-        /* Mobil optimalizált keret számítógépen */
-        @media (min-width: 640px) {
-            body {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                min-height: 100vh;
-                margin: 0;
-            }
-            #app-container {
-                width: 100%;
-                max-width: 480px;
+        @media (min-width: 520px) {
+            .app-shell {
+                min-height: 820px;
                 height: 90vh;
-                max-height: 850px;
-                border-radius: 2.5rem;
-                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-                overflow: hidden;
-                border: 8px solid #2C3531;
-                display: flex;
-                flex-direction: column;
+                max-height: 920px;
+                border-radius: 36px;
+                box-shadow: 0 25px 60px -15px rgba(25, 30, 35, 0.16), 0 0 0 8px #FFFFFF;
             }
         }
-        @media (max-width: 639px) {
-            #app-container {
-                width: 100%;
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-            }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
+        .animate-view { animation: fadeSlideUp 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.96) translateY(14px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .animate-modal { animation: modalPop 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        /* Szám input nyilak elrejtése a tiszta Hevy táblázathoz */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] { -moz-appearance: textfield; }
     </style>
 </head>
-<body class="theme-zsalyag">
+<body class="flex items-center justify-center sm:p-4 font-sans antialiased">
 
     <!-- Fő Alkalmazás Keret -->
-    <div id="app-container" class="relative flex flex-col transition-colors duration-300" style="background-color: var(--bg-main);">
+    <div id="app" class="app-shell w-full sm:max-w-[480px] relative flex flex-col overflow-hidden">
         
-        <!-- Fejléc -->
-        <header class="px-5 py-4 custom-card border-b flex justify-between items-center z-10">
-            <div>
-                <h1 id="header-studio-name" class="font-bold text-lg tracking-tight" style="color: var(--text-main);">FitStudio Pro</h1>
-                <p id="header-trainer-name" class="text-xs" style="color: var(--text-muted);">Személyi Edző Stúdió</p>
-            </div>
-            <div class="flex items-center gap-2">
-                <!-- Téma Váltó Gyorsgomb -->
-                <button onclick="switchThemeCycle()" class="w-9 h-9 rounded-full flex items-center justify-center custom-card shadow-sm text-sm" title="Téma váltása">
-                    <i class="fa-solid fa-palette" style="color: var(--primary);"></i>
-                </button>
-                <!-- Aktív Vendég Jelvény -->
-                <div id="header-badge" class="px-3 py-1 rounded-full text-xs font-semibold accent-bg text-white shadow-sm">
-                    Stúdió Mód
+        <!-- Felső Stúdió Fejléc -->
+        <header class="px-5 pt-4 pb-3 bg-theme-bg/95 backdrop-blur-md z-20 flex items-center justify-between border-b border-theme-border shrink-0">
+            <div class="flex items-center gap-3 min-w-0">
+                <div class="w-10 h-10 rounded-2xl bg-theme-primary text-white flex items-center justify-center shadow-sm shrink-0">
+                    <i class="ph-bold ph-barbell text-xl"></i>
+                </div>
+                <div class="truncate">
+                    <p id="header-subtitle" class="text-[10px] uppercase tracking-wider font-bold text-theme-muted truncate">Személyi Edzői Rendszer</p>
+                    <h1 id="header-title" class="font-heading font-bold text-base text-theme-text truncate">Kovács Anna • Mozgásstúdió</h1>
                 </div>
             </div>
+            
+            <!-- Gyors témaváltó gomb -->
+            <button onclick="cycleThemeQuick()" class="w-10 h-10 rounded-2xl bg-theme-card border border-theme-border flex items-center justify-center text-theme-primary hover:bg-theme-primarySoft transition-all shadow-card shrink-0 active:scale-95" title="Színtéma váltása">
+                <i class="ph-fill ph-palette text-xl"></i>
+            </button>
         </header>
 
-        <!-- Fő Tartalom Terület (Görgethető) -->
-        <main id="main-content" class="flex-1 overflow-y-auto pb-24 px-4 py-4 space-y-4">
-            <!-- Dinamikusan töltődik be JS-sel -->
-        </main>
-
-        <!-- Pihenőidő Visszaszámláló Sáv (Ha aktív) -->
-        <div id="rest-timer-bar" class="hidden absolute bottom-16 left-0 right-0 mx-4 p-3 rounded-2xl shadow-lg border flex justify-between items-center z-20" style="background-color: var(--card-bg); border-color: var(--primary);">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white" style="background-color: var(--primary);">
-                    <i class="fa-solid fa-stopwatch animate-pulse"></i>
-                </div>
-                <div>
-                    <p class="text-xs font-medium" style="color: var(--text-muted);">Pihenőidő</p>
-                    <p id="timer-display" class="text-lg font-bold" style="color: var(--text-main);">01:30</p>
-                </div>
+        <!-- Aktív Edzés Folyamatban Jelző Sáv (ha másik fülre vált az edző) -->
+        <div id="active-workout-banner" onclick="switchTab('workout')" class="hidden bg-theme-primary text-white px-5 py-2.5 text-xs font-medium flex items-center justify-between cursor-pointer shrink-0 shadow-sm">
+            <div class="flex items-center gap-2 truncate">
+                <span class="w-2 h-2 rounded-full bg-theme-accent animate-ping"></span>
+                <span id="banner-workout-info" class="truncate font-semibold">Edzés folyamatban...</span>
             </div>
-            <div class="flex gap-2">
-                <button onclick="adjustTimer(-15)" class="px-3 py-1.5 rounded-lg text-xs font-bold custom-card" style="color: var(--text-main);">-15s</button>
-                <button onclick="adjustTimer(15)" class="px-3 py-1.5 rounded-lg text-xs font-bold custom-card" style="color: var(--text-main);">+15s</button>
-                <button onclick="stopRestTimer()" class="w-9 h-9 rounded-lg flex items-center justify-center bg-red-100 text-red-500 font-bold"><i class="fa-solid fa-xmark"></i></button>
+            <div class="flex items-center gap-2 shrink-0">
+                <span id="banner-workout-timer" class="font-mono font-bold bg-white/20 px-2 py-0.5 rounded-lg">00:00</span>
+                <i class="ph-bold ph-arrow-right"></i>
             </div>
         </div>
 
-        <!-- Alsó Navigációs Sáv (Tabok) -->
-        <nav class="absolute bottom-0 left-0 right-0 custom-card border-t py-2 px-6 flex justify-around items-center z-10 shadow-lg">
-            <button onclick="changeTab('vendégek')" id="nav-vendégek" class="flex flex-col items-center gap-1 transition-colors text-xs font-semibold" style="color: var(--primary);">
-                <i class="fa-solid fa-users text-lg"></i>
-                <span>Vendégek</span>
+        <!-- Fő Tartalmi Terület -->
+        <main id="main-content" class="flex-1 overflow-y-auto no-scrollbar px-4 pt-4 pb-32">
+            <!-- Dinamikusan renderelve -->
+        </main>
+
+        <!-- Lebegő Pihenőidő Visszaszámláló Sáv (Rest Timer) -->
+        <div id="rest-timer-bar" class="hidden absolute bottom-[74px] inset-x-3 z-30 bg-theme-text text-white rounded-2xl p-3 shadow-float border border-white/10 animate-view">
+            <div class="flex items-center justify-between gap-2">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-xl bg-theme-primary flex items-center justify-center shrink-0">
+                        <i class="ph-bold ph-timer text-lg"></i>
+                    </div>
+                    <div>
+                        <p class="text-[10px] uppercase tracking-wider text-white/70 font-semibold">Pihenőidő</p>
+                        <p id="rest-timer-display" class="font-mono font-bold text-lg leading-none mt-0.5">01:30</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-1.5">
+                    <button onclick="adjustRestTimer(-15)" class="px-2.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold transition-all">-15s</button>
+                    <button onclick="adjustRestTimer(15)" class="px-2.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold transition-all">+15s</button>
+                    <button onclick="stopRestTimer()" class="px-3 py-1.5 rounded-xl bg-theme-accent text-theme-text font-heading font-bold text-xs hover:opacity-90 transition-all">Kihagyás</button>
+                </div>
+            </div>
+            <!-- Haladás csík -->
+            <div class="w-full h-1 bg-white/15 rounded-full mt-2.5 overflow-hidden">
+                <div id="rest-timer-progress" class="h-full bg-theme-accent transition-all duration-300" style="width: 100%"></div>
+            </div>
+        </div>
+
+        <!-- Alsó Navigációs Sáv (4 fő fül) -->
+        <nav class="absolute bottom-0 inset-x-0 bg-theme-card/95 backdrop-blur-md border-t border-theme-border px-2 py-2 z-30 flex justify-around items-center">
+            <button onclick="switchTab('clients')" id="nav-clients" class="nav-btn flex flex-col items-center gap-1 py-1.5 px-3 rounded-2xl transition-all">
+                <i class="ph-fill ph-users text-xl"></i>
+                <span class="text-[11px] font-semibold">Vendégek</span>
             </button>
-            <button onclick="changeTab('naplo')" id="nav-naplo" class="flex flex-col items-center gap-1 transition-colors text-xs font-medium" style="color: var(--text-muted);">
-                <i class="fa-solid fa-dumbbell text-lg"></i>
-                <span>Edzésnapló</span>
+            <button onclick="switchTab('workout')" id="nav-workout" class="nav-btn flex flex-col items-center gap-1 py-1.5 px-3 rounded-2xl transition-all">
+                <i class="ph ph-play-circle text-xl"></i>
+                <span class="text-[11px] font-semibold">Edzés</span>
             </button>
-            <button onclick="changeTab('haladas')" id="nav-haladas" class="flex flex-col items-center gap-1 transition-colors text-xs font-medium" style="color: var(--text-muted);">
-                <i class="fa-solid fa-camera text-lg"></i>
-                <span>Haladás</span>
+            <button onclick="switchTab('routines')" id="nav-routines" class="nav-btn flex flex-col items-center gap-1 py-1.5 px-3 rounded-2xl transition-all">
+                <i class="ph ph-clipboard-text text-xl"></i>
+                <span class="text-[11px] font-semibold">Sablonok</span>
             </button>
-            <button onclick="changeTab('studio')" id="nav-studio" class="flex flex-col items-center gap-1 transition-colors text-xs font-medium" style="color: var(--text-muted);">
-                <i class="fa-solid fa-gear text-lg"></i>
-                <span>Stúdió</span>
+            <button onclick="switchTab('studio')" id="nav-studio" class="nav-btn flex flex-col items-center gap-1 py-1.5 px-3 rounded-2xl transition-all">
+                <i class="ph ph-sliders-horizontal text-xl"></i>
+                <span class="text-[11px] font-semibold">Stúdió</span>
             </button>
         </nav>
+
+        <!-- Toast Értesítés Konténer -->
+        <div id="toast-container" class="fixed sm:absolute top-16 inset-x-4 z-50 pointer-events-none flex flex-col items-center gap-2"></div>
+
+        <!-- Modális Ablak Konténer -->
+        <div id="modal-backdrop" class="hidden fixed sm:absolute inset-0 bg-black/45 backdrop-blur-[2px] z-40 flex items-end sm:items-center justify-center p-0 sm:p-4">
+            <div id="modal-content" class="bg-theme-bg w-full max-h-[92%] rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-y-auto no-scrollbar p-5 animate-modal border border-theme-border">
+                <!-- Modális tartalom -->
+            </div>
+        </div>
     </div>
 
-    <!-- JavaScript Alkalmazás Logika -->
     <script>
-        // --- ADATBÁZIS & ÁLLAPOT ---
-        let appData = {
-            trainerName: "Kovács Anna",
-            studioName: "FitStudio Pro",
-            theme: "theme-zsalyag", // alapértelmezett
-            activeTab: "vendégek",
-            selectedClientIndex: 0,
+        /**
+         * TÉMÁK DEFINÍCIÓJA
+         */
+        const THEMES = {
+            sage: {
+                id: 'sage',
+                name: 'Zsálya & Barack',
+                desc: 'Uniszex / Alap pasztell',
+                swatches: ['#FAF8F5', '#7C968B', '#E6A995']
+            },
+            mauve: {
+                id: 'mauve',
+                name: 'Púder & Mályva',
+                desc: 'Nőies, lágy rózsakvarc',
+                swatches: ['#FCF7F8', '#B87D8B', '#E5B4BE']
+            },
+            slate: {
+                id: 'slate',
+                name: 'Pala & Kékesszürke',
+                desc: 'Férfiasabb, sportos pasztell',
+                swatches: ['#F3F5F7', '#5B7387', '#8EAAB8']
+            },
+            terracotta: {
+                id: 'terracotta',
+                name: 'Homok & Terrakotta',
+                desc: 'Meleg, természetes földszínek',
+                swatches: ['#F9F5F0', '#B87B5E', '#DFB296']
+            }
+        };
+
+        /**
+         * 36 ELŐRE FELTÖLTÖTT MAGYAR GYAKORLAT IZOMCSOPORTONKÉNT
+         */
+        const INITIAL_EXERCISES = [
+            // Mell (6)
+            { id: 'ex1', name: 'Fekvenyomás rúddal', muscle: 'Mell' },
+            { id: 'ex2', name: 'Fekvenyomás egykezes súlyzóval', muscle: 'Mell' },
+            { id: 'ex3', name: 'Fekvenyomás ferdepadon', muscle: 'Mell' },
+            { id: 'ex4', name: 'Tárogatás kézisúlyzóval', muscle: 'Mell' },
+            { id: 'ex5', name: 'Keresztcsigás tárogatás', muscle: 'Mell' },
+            { id: 'ex6', name: 'Fekvőtámasz', muscle: 'Mell' },
+            // Hát (6)
+            { id: 'ex7', name: 'Lehúzás csigán széles fogással', muscle: 'Hát' },
+            { id: 'ex8', name: 'Evezés döntött törzzsel rúddal', muscle: 'Hát' },
+            { id: 'ex9', name: 'Egykezes fűrészelés kézisúlyzóval', muscle: 'Hát' },
+            { id: 'ex10', name: 'Evezés ülve alsó csigán', muscle: 'Hát' },
+            { id: 'ex11', name: 'Húzódzkodás (vagy gumiszalaggal)', muscle: 'Hát' },
+            { id: 'ex12', name: 'Hypernyújtás (feszítőpad)', muscle: 'Hát' },
+            // Láb & Far (8)
+            { id: 'ex13', name: 'Guggolás rúddal (Back Squat)', muscle: 'Láb & Far' },
+            { id: 'ex14', name: 'Serleg guggolás (Goblet Squat)', muscle: 'Láb & Far' },
+            { id: 'ex15', name: 'Csípőemelés rúddal (Hip Thrust)', muscle: 'Láb & Far' },
+            { id: 'ex16', name: 'Bolgár guggolás kézisúlyzóval', muscle: 'Láb & Far' },
+            { id: 'ex17', name: 'Román felhúzás (RDL)', muscle: 'Láb & Far' },
+            { id: 'ex18', name: 'Lábtoló gép (Leg Press)', muscle: 'Láb & Far' },
+            { id: 'ex19', name: 'Combhajlító gépen fekve', muscle: 'Láb & Far' },
+            { id: 'ex20', name: 'Kitörés sétálva', muscle: 'Láb & Far' },
+            // Váll (6)
+            { id: 'ex21', name: 'Vállból nyomás ülve kézisúlyzóval', muscle: 'Váll' },
+            { id: 'ex22', name: 'Oldalemelés kézisúlyzóval', muscle: 'Váll' },
+            { id: 'ex23', name: 'Előreemelés kézisúlyzóval', muscle: 'Váll' },
+            { id: 'ex24', name: 'Face Pull (hátsó váll csigán)', muscle: 'Váll' },
+            { id: 'ex25', name: 'Döntött törzsű oldalemelés', muscle: 'Váll' },
+            { id: 'ex26', name: 'Arnold nyomás', muscle: 'Váll' },
+            // Kar (6)
+            { id: 'ex27', name: 'Bicepsz karhajlítás kézisúlyzóval', muscle: 'Kar' },
+            { id: 'ex28', name: 'Bicepsz franciarúddal', muscle: 'Kar' },
+            { id: 'ex29', name: 'Kalapács bicepsz', muscle: 'Kar' },
+            { id: 'ex30', name: 'Tricepsz letolás csigán kötéllel', muscle: 'Kar' },
+            { id: 'ex31', name: 'Homlokra engedés (Skullcrusher)', muscle: 'Kar' },
+            { id: 'ex32', name: 'Tolódzkodás padon', muscle: 'Kar' },
+            // Törzs (4)
+            { id: 'ex33', name: 'Plank tartás (mp)', muscle: 'Törzs' },
+            { id: 'ex34', name: 'Hasprés talajon / fitballon', muscle: 'Törzs' },
+            { id: 'ex35', name: 'Lábemelés függeszkedve / fekve', muscle: 'Törzs' },
+            { id: 'ex36', name: 'Dead Bug (stabilizáló)', muscle: 'Törzs' }
+        ];
+
+        /**
+         * ALAPÉRTELMEZETT ADATBÁZIS (MINTA VENDÉGEKKEL ÉS KORÁBBI EDZÉSEKKEL)
+         */
+        const STORAGE_KEY = 'hevy_pastel_pt_studio_v2';
+
+        const DEFAULT_DATA = {
+            studio: {
+                title: 'Kovács Anna • Mozgásstúdió',
+                subtitle: 'Személyi Edzői Rendszer',
+                theme: 'sage',
+                defaultRestSeconds: 90
+            },
+            exercises: INITIAL_EXERCISES,
+            routines: [
+                {
+                    id: 'r1',
+                    name: 'Női Alsótest Fókusz',
+                    category: 'Alakformálás',
+                    exercises: [
+                        { exerciseId: 'ex15', defaultSets: 4, defaultReps: 12, defaultWeight: 45 },
+                        { exerciseId: 'ex16', defaultSets: 3, defaultReps: 10, defaultWeight: 10 },
+                        { exerciseId: 'ex17', defaultSets: 3, defaultReps: 12, defaultWeight: 35 },
+                        { exerciseId: 'ex14', defaultSets: 3, defaultReps: 12, defaultWeight: 14 }
+                    ]
+                },
+                {
+                    id: 'r2',
+                    name: 'Felsőtest Erőnlét',
+                    category: 'Izomépítés',
+                    exercises: [
+                        { exerciseId: 'ex2', defaultSets: 4, defaultReps: 10, defaultWeight: 22 },
+                        { exerciseId: 'ex7', defaultSets: 4, defaultReps: 10, defaultWeight: 55 },
+                        { exerciseId: 'ex21', defaultSets: 3, defaultReps: 10, defaultWeight: 16 },
+                        { exerciseId: 'ex24', defaultSets: 3, defaultReps: 15, defaultWeight: 20 }
+                    ]
+                },
+                {
+                    id: 'r3',
+                    name: 'Teljes Test Kezdő',
+                    category: 'Alapozó',
+                    exercises: [
+                        { exerciseId: 'ex14', defaultSets: 3, defaultReps: 12, defaultWeight: 10 },
+                        { exerciseId: 'ex10', defaultSets: 3, defaultReps: 12, defaultWeight: 30 },
+                        { exerciseId: 'ex6', defaultSets: 3, defaultReps: 10, defaultWeight: 0 },
+                        { exerciseId: 'ex33', defaultSets: 3, defaultReps: 40, defaultWeight: 0 }
+                    ]
+                }
+            ],
             clients: [
                 {
-                    name: "Kiss Eszter",
-                    goal: "Alakformálás & fenék feszesség",
-                    injury: "Enyhe térdfájás guggoláskor",
-                    weight: "62.5 kg",
-                    height: "168 cm",
-                    photos: [
-                        { date: "2026-01-10", before: "", after: "", note: "Kezdő állapot" }
+                    id: 'c1',
+                    name: 'Kiss Eszter',
+                    age: 29,
+                    goal: 'Alakformálás & Farizom fókusz',
+                    weight: 63.5,
+                    notes: 'Bal térd érzékeny mély guggolásnál, alapos bemelegítés szükséges. Heti 3 edzés.',
+                    avatarColor: '#7C968B',
+                    measurements: [
+                        { date: '2026-10-01', weight: 66.2, waist: 73, hips: 99, arm: 28.5, thigh: 57 },
+                        { date: '2026-11-12', weight: 63.5, waist: 70, hips: 96, arm: 28.0, thigh: 55 }
                     ],
-                    workouts: [
+                    photos: []
+                },
+                {
+                    id: 'c2',
+                    name: 'Nagy Bence',
+                    age: 34,
+                    goal: 'Izomépítés & Erőnlét növelése',
+                    weight: 79.0,
+                    notes: 'Ülőmunka miatti enyhe háti merevség, mellkasi gerinc mobilizáció minden edzés elején.',
+                    avatarColor: '#5B7387',
+                    measurements: [
+                        { date: '2026-09-15', weight: 75.5, waist: 82, hips: 98, arm: 35.5, thigh: 58 },
+                        { date: '2026-11-14', weight: 79.0, waist: 81, hips: 99, arm: 37.0, thigh: 60.5 }
+                    ],
+                    photos: []
+                },
+                {
+                    id: 'c3',
+                    name: 'Szabó Dóra',
+                    age: 25,
+                    goal: 'Fogyás & Állóképesség',
+                    weight: 71.2,
+                    notes: 'Kezdő vendég, fokozatos terhelés. Szereti a pörgős edzéseket.',
+                    avatarColor: '#B87D8B',
+                    measurements: [
+                        { date: '2026-11-01', weight: 72.8, waist: 79, hips: 103, arm: 30.0, thigh: 61 },
+                        { date: '2026-11-15', weight: 71.2, waist: 77.5, hips: 101.5, arm: 29.5, thigh: 60 }
+                    ],
+                    photos: []
+                }
+            ],
+            // Korábbi befejezett edzések (a Hevy "Előző" és "PR" működéséhez!)
+            workoutHistory: [
+                {
+                    id: 'wh1',
+                    clientId: 'c1',
+                    title: 'Női Alsótest Fókusz',
+                    date: '2026-11-12',
+                    durationSeconds: 3120,
+                    totalVolume: 2680,
+                    prCount: 1,
+                    exercises: [
                         {
-                            date: "2026-02-15",
-                            name: "Alsótest & Fartáji Fókusz",
-                            exercises: [
-                                { name: "Csípőemelés (Hip Thrust)", sets: [{ kg: 50, reps: 12, done: true }, { kg: 55, reps: 10, done: true }, { kg: 55, reps: 8, done: true }] },
-                                { name: "Bolgár egylábas guggolás", sets: [{ kg: 10, reps: 10, done: true }, { kg: 10, reps: 10, done: true }] }
+                            exerciseId: 'ex15',
+                            sets: [
+                                { weight: 40, reps: 12, completed: true },
+                                { weight: 45, reps: 12, completed: true },
+                                { weight: 50, reps: 10, completed: true }
+                            ]
+                        },
+                        {
+                            exerciseId: 'ex16',
+                            sets: [
+                                { weight: 10, reps: 10, completed: true },
+                                { weight: 10, reps: 10, completed: true },
+                                { weight: 12, reps: 8, completed: true }
+                            ]
+                        },
+                        {
+                            exerciseId: 'ex17',
+                            sets: [
+                                { weight: 35, reps: 12, completed: true },
+                                { weight: 40, reps: 10, completed: true }
                             ]
                         }
                     ]
                 },
                 {
-                    name: "Nagy Bence",
-                    goal: "Erőfejlesztés & izomtömeg",
-                    injury: "Nincs sérülés",
-                    weight: "84.0 kg",
-                    height: "182 cm",
-                    photos: [],
-                    workouts: []
+                    id: 'wh2',
+                    clientId: 'c2',
+                    title: 'Felsőtest Erőnlét',
+                    date: '2026-11-14',
+                    durationSeconds: 3480,
+                    totalVolume: 4120,
+                    prCount: 2,
+                    exercises: [
+                        {
+                            exerciseId: 'ex2',
+                            sets: [
+                                { weight: 22, reps: 10, completed: true },
+                                { weight: 24, reps: 10, completed: true },
+                                { weight: 26, reps: 8, completed: true }
+                            ]
+                        },
+                        {
+                            exerciseId: 'ex7',
+                            sets: [
+                                { weight: 55, reps: 12, completed: true },
+                                { weight: 60, reps: 10, completed: true },
+                                { weight: 65, reps: 8, completed: true }
+                            ]
+                        }
+                    ]
                 },
                 {
-                    name: "Szabó Dóra",
-                    goal: "Core erősítés & tartásjavítás",
-                    injury: "Derékfájás (ülésből adódó)",
-                    weight: "58.0 kg",
-                    height: "165 cm",
-                    photos: [],
-                    workouts: []
+                    id: 'wh3',
+                    clientId: 'c3',
+                    title: 'Teljes Test Kezdő',
+                    date: '2026-11-15',
+                    durationSeconds: 2700,
+                    totalVolume: 1440,
+                    prCount: 0,
+                    exercises: [
+                        {
+                            exerciseId: 'ex14',
+                            sets: [
+                                { weight: 10, reps: 12, completed: true },
+                                { weight: 12, reps: 12, completed: true },
+                                { weight: 12, reps: 12, completed: true }
+                            ]
+                        },
+                        {
+                            exerciseId: 'ex10',
+                            sets: [
+                                { weight: 25, reps: 12, completed: true },
+                                { weight: 30, reps: 12, completed: true }
+                            ]
+                        }
+                    ]
                 }
-            ],
-            exercisesDB: [
-                { category: "Alsótest", name: "Csípőemelés (Hip Thrust)" },
-                { category: "Alsótest", name: "Bolgár egylábas guggolás" },
-                { category: "Alsótest", name: "Súlyzós Guggolás (Squat)" },
-                { category: "Alsótest", name: "Román felhúzás (RDL)" },
-                { category: "Felsőtest", name: "Fekvenyomás kézi súlyzóval" },
-                { category: "Felsőtest", name: "Vállból nyomás" },
-                { category: "Felsőtest", name: "Hátra húzás csigán (Lat Pulldown)" },
-                { category: "Törzs / Core", name: "Plank (Plank tartás)" },
-                { category: "Törzs / Core", name: "Hasprés labdán" }
-            ],
-            templates: [
-                { name: "Női Alsótest Fókusz (A)", exercises: ["Csípőemelés (Hip Thrust)", "Bolgár egylábas guggolás", "Román felhúzás (RDL)"] },
-                { name: "Felsőtest Erő & Tartás (B)", exercises: ["Hátra húzás csigán (Lat Pulldown)", "Fekvenyomás kézi súlyzóval", "Vállból nyomás"] }
             ]
         };
 
-        // Mentés localStorage-ba
-        function saveToStorage() {
-            localStorage.setItem('hevy_pasztell_data', JSON.stringify(appData));
-        }
+        /**
+         * ALKALMAZÁS ÁLLAPOT
+         */
+        let appData = loadAppData();
+        let currentTab = 'clients';
+        let clientSearchQuery = '';
+        let selectedWorkoutClientId = appData.clients[0]?.id || '';
+        
+        // Aktív edzés (Hevy Live Session)
+        let activeWorkout = null;
+        let workoutTimerInterval = null;
 
-        // Betöltés localStorage-ból
-        function loadFromStorage() {
-            const saved = localStorage.getItem('hevy_pasztell_data');
-            if (saved) {
-                try {
-                    appData = JSON.parse(saved);
-                } catch(e) { console.error(e); }
+        // Pihenőidő számláló (Rest Timer)
+        let restTimerInterval = null;
+        let restRemainingSeconds = 0;
+        let restTotalSeconds = 90;
+
+        // Sablonok / Gyakorlatok al-nézet
+        let routinesSubTab = 'routines'; // 'routines' | 'exercises'
+        let exerciseMuscleFilter = 'Összes';
+
+        // Vendég részletes nézet állapot
+        let viewingClientId = null;
+        let clientProfileTab = 'history'; // 'history' | 'photos' | 'measurements'
+
+        /**
+         * ADATMENTÉS ÉS TÉMA ALKALMAZÁS
+         */
+        function loadAppData() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) return JSON.parse(raw);
+            } catch (e) {
+                console.error('Betöltési hiba:', e);
             }
-            document.body.className = appData.theme;
+            return JSON.parse(JSON.stringify(DEFAULT_DATA));
         }
 
-        // --- TÉMA VÁLTÓ LOGIKA ---
-        const themesList = ["theme-zsalyag", "theme-puder", "theme-pala", "theme-homok"];
-        const themeNames = { "theme-zsalyag": "Zsálya & Barack", "theme-puder": "Púder & Mályva", "theme-pala": "Pala & Kékesszürke", "theme-homok": "Homok & Terrakotta" };
-
-        function switchThemeCycle() {
-            let currentIndex = themesList.indexOf(appData.theme);
-            let nextIndex = (currentIndex + 1) % themesList.length;
-            appData.theme = themesList[nextIndex];
-            document.body.className = appData.theme;
-            saveToStorage();
-            renderApp();
-        }
-
-        function setTheme(themeClass) {
-            appData.theme = themeClass;
-            document.body.className = themeClass;
-            saveToStorage();
-            renderApp();
-        }
-
-        // --- NAVIGÁCIÓ & RENDERELÉS ---
-        function changeTab(tabName) {
-            appData.activeTab = tabName;
-            renderApp();
-        }
-
-        function renderApp() {
-            // Fejléc adatok frissítése
-            document.getElementById('header-studio-name').innerText = appData.studioName;
-            document.getElementById('header-trainer-name').innerText = appData.trainerName;
-            
-            const activeClient = appData.clients[appData.selectedClientIndex];
-            document.getElementById('header-badge').innerText = activeClient ? activeClient.name : "Stúdió Mód";
-
-            // Navigációs gombok stílusának frissítése
-            ['vendégek', 'naplo', 'haladas', 'studio'].forEach(tab => {
-                const btn = document.getElementById(`nav-${tab}`);
-                if (tab === appData.activeTab) {
-                    btn.style.color = 'var(--primary)';
-                    btn.style.fontWeight = '600';
-                } else {
-                    btn.style.color = 'var(--text-muted)';
-                    btn.style.fontWeight = '500';
-                }
-            });
-
-            const mainContent = document.getElementById('main-content');
-            mainContent.innerHTML = '';
-
-            if (appData.activeTab === 'vendégek') {
-                renderClientsTab(mainContent);
-            } else if (appData.activeTab === 'naplo') {
-                renderWorkoutTab(mainContent);
-            } else if (appData.activeTab === 'haladas') {
-                renderProgressTab(mainContent);
-            } else if (appData.activeTab === 'studio') {
-                renderStudioTab(mainContent);
+        function saveAppData() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+                applyTheme(appData.studio.theme);
+                updateHeaderUI();
+            } catch (e) {
+                showToast('A böngésző tárhelye megtelt! Exportáld az adatokat vagy törölj régi fotót.', 'error');
             }
         }
 
-        // --- 1. VENDÉGEK FÜL ---
-        function renderClientsTab(container) {
-            let html = `
-                <div class="flex justify-between items-center mb-3">
-                    <h2 class="font-bold text-base" style="color: var(--text-main);">Ügyfélkör (${appData.clients.length})</h2>
-                    <button onclick="openNewClientModal()" class="px-3 py-1.5 rounded-xl text-xs font-bold btn-primary shadow-sm">
-                        <i class="fa-solid fa-plus mr-1"></i> Új Vendég
-                    </button>
-                </div>
-                <div class="space-y-3">
-            `;
+        function applyTheme(themeId) {
+            const validTheme = THEMES[themeId] ? themeId : 'sage';
+            document.documentElement.setAttribute('data-theme', validTheme);
+        }
 
-            appData.clients.forEach((client, idx) => {
-                const isSelected = idx === appData.selectedClientIndex;
-                html += `
-                    <div onclick="selectClient(${idx})" class="custom-card p-4 rounded-2xl shadow-sm cursor-pointer transition-all border ${isSelected ? 'ring-2' : ''}" style="${isSelected ? 'border-color: var(--primary);' : ''}">
-                        <div class="flex justify-between items-start mb-2">
-                            <div>
-                                <h3 class="font-bold text-base" style="color: var(--text-main);">${client.name}</h3>
-                                <p class="text-xs" style="color: var(--text-muted);">${client.goal}</p>
-                            </div>
-                            <span class="px-2.5 py-1 rounded-full text-xs font-semibold" style="background-color: var(--bg-main); color: var(--text-main);">
-                                ${client.weight}
-                            </span>
-                        </div>
-                        <div class="flex items-center justify-between pt-2 border-t border-custom text-xs" style="color: var(--text-muted);">
-                            <span><i class="fa-solid fa-triangle-exclamation mr-1 text-amber-500"></i> ${client.injury}</span>
-                            <span class="font-semibold" style="color: var(--primary);">Kiválasztás <i class="fa-solid fa-arrow-right ml-1"></i></span>
-                        </div>
-                    </div>
-                `;
+        function cycleThemeQuick() {
+            const keys = Object.keys(THEMES);
+            const currentIdx = keys.indexOf(appData.studio.theme);
+            const nextTheme = keys[(currentIdx + 1) % keys.length];
+            appData.studio.theme = nextTheme;
+            saveAppData();
+            if (currentTab === 'studio') renderCurrentView();
+            showToast(`Téma: ${THEMES[nextTheme].name}`);
+        }
+
+        function updateHeaderUI() {
+            document.getElementById('header-title').textContent = appData.studio.title;
+            document.getElementById('header-subtitle').textContent = appData.studio.subtitle;
+        }
+
+        /**
+         * TOAST ÉRTESÍTÉS
+         */
+        function showToast(msg, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const el = document.createElement('div');
+            const bg = type === 'error' ? 'bg-red-600 text-white' : 'bg-theme-text text-white';
+            el.className = `${bg} px-4 py-2.5 rounded-2xl shadow-lg text-xs font-semibold flex items-center gap-2 animate-view pointer-events-auto`;
+            el.innerHTML = `<i class="ph-fill ${type === 'error' ? 'ph-warning-circle' : 'ph-check-circle'} text-base text-theme-accent"></i><span>${escapeHtml(msg)}</span>`;
+            container.appendChild(el);
+            setTimeout(() => {
+                el.style.opacity = '0';
+                el.style.transition = 'opacity 0.25s';
+                setTimeout(() => el.remove(), 250);
+            }, 2500);
+        }
+
+        /**
+         * NAVIGÁCIÓ
+         */
+        function switchTab(tab) {
+            currentTab = tab;
+            viewingClientId = null;
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-theme-primary', 'bg-theme-primarySoft');
+                btn.classList.add('text-theme-muted');
+                const icon = btn.querySelector('i');
+                if (icon) icon.className = icon.className.replace('ph-fill', 'ph');
             });
-            html += `</div>`;
-            container.innerHTML = html;
+
+            const activeBtn = document.getElementById(`nav-${tab}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-theme-muted');
+                activeBtn.classList.add('text-theme-primary', 'bg-theme-primarySoft');
+                const icon = activeBtn.querySelector('i');
+                if (icon) icon.className = icon.className.replace('ph ', 'ph-fill ');
+            }
+
+            updateActiveWorkoutBanner();
+            renderCurrentView();
         }
 
-        function selectClient(idx) {
-            appData.selectedClientIndex = idx;
-            renderApp();
-        }
+        function renderCurrentView() {
+            const main = document.getElementById('main-content');
+            main.scrollTop = 0;
 
-        function openNewClientModal() {
-            const name = prompt("Add meg az új vendég nevét:");
-            if (!name) return;
-            const goal = prompt("Cél (pl. Fogyás, Erőfejlesztés):") || "Általános fittség";
-            const injury = prompt("Sérülések, egészségügyi megjegyzések:") || "Nincs";
-            
-            appData.clients.push({
-                name, goal, injury, weight: "70 kg", height: "175 cm", photos: [], workouts: []
-            });
-            appData.selectedClientIndex = appData.clients.length - 1;
-            saveToStorage();
-            renderApp();
-        }
-
-        // --- 2. EDZÉSNAPLÓ FÜL (Hevy stílus) ---
-        function renderWorkoutTab(container) {
-            const client = appData.clients[appData.selectedClientIndex];
-            if (!client) {
-                container.innerHTML = `<p class="text-center text-sm py-10" style="color: var(--text-muted);">Először válassz ki egy vendéget a Vendégek fülön!</p>`;
+            if (viewingClientId) {
+                renderClientProfileView(main, viewingClientId);
                 return;
             }
 
-            let html = `
-                <div class="custom-card p-4 rounded-2xl shadow-sm mb-4 flex justify-between items-center">
-                    <div>
-                        <p class="text-xs font-medium" style="color: var(--text-muted);">Aktív Vendég:</p>
-                        <h2 class="font-bold text-base" style="color: var(--text-main);">${client.name}</h2>
+            if (currentTab === 'clients') renderClientsTab(main);
+            else if (currentTab === 'workout') renderWorkoutTab(main);
+            else if (currentTab === 'routines') renderRoutinesTab(main);
+            else if (currentTab === 'studio') renderStudioTab(main);
+        }
+
+        /**
+         * 1. VENDÉGEK FÜL (Clients)
+         */
+        function renderClientsTab(container) {
+            const filtered = appData.clients.filter(c =>
+                c.name.toLowerCase().includes(clientSearchQuery.toLowerCase()) ||
+                c.goal.toLowerCase().includes(clientSearchQuery.toLowerCase())
+            );
+
+            container.innerHTML = `
+                <div class="animate-view space-y-4">
+                    <!-- Kereső és Új vendég gomb -->
+                    <div class="flex items-center gap-2">
+                        <div class="relative flex-1">
+                            <i class="ph ph-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-theme-muted text-lg"></i>
+                            <input type="text" value="${escapeHtml(clientSearchQuery)}" oninput="clientSearchQuery=this.value; renderClientsTab(document.getElementById('main-content'))"
+                                placeholder="Vendég keresése név vagy cél alapján..."
+                                class="w-full pl-10 pr-4 py-3 bg-theme-card rounded-2xl text-sm border border-theme-border focus:outline-none focus:border-theme-primary shadow-card">
+                        </div>
+                        <button onclick="openNewClientModal()" class="px-4 py-3 bg-theme-primary text-white font-heading font-bold text-sm rounded-2xl shadow-card hover:bg-theme-primaryDark transition-all flex items-center gap-1.5 shrink-0 active:scale-95">
+                            <i class="ph-bold ph-user-plus text-base"></i>
+                            <span>Új</span>
+                        </button>
                     </div>
-                    <button onclick="startNewWorkout()" class="px-4 py-2 rounded-xl text-xs font-bold btn-primary shadow-sm">
-                        <i class="fa-solid fa-plus mr-1"></i> Új Edzés Indítása
+
+                    <!-- Vendég kártyák -->
+                    <div class="space-y-3">
+                        ${filtered.length === 0 ? `
+                            <div class="bg-theme-card rounded-3xl p-8 text-center border border-theme-border">
+                                <i class="ph ph-users text-3xl text-theme-muted mb-2"></i>
+                                <p class="font-heading font-bold text-sm">Nincs megjeleníthető vendég</p>
+                                <p class="text-xs text-theme-muted mt-1">Adj hozzá új vendéget a fenti gombbal!</p>
+                            </div>
+                        ` : filtered.map(client => {
+                            const history = appData.workoutHistory
+                                .filter(w => w.clientId === client.id)
+                                .sort((a, b) => new Date(b.date) - new Date(a.date));
+                            const lastWorkout = history[0];
+                            const initials = getInitials(client.name);
+
+                            return `
+                                <div onclick="openClientProfile('${client.id}')" class="bg-theme-card rounded-3xl p-4 shadow-soft border border-theme-border hover:border-theme-primary/60 transition-all cursor-pointer active:scale-[0.99]">
+                                    <div class="flex items-center justify-between gap-3">
+                                        <div class="flex items-center gap-3.5 min-w-0">
+                                            <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-white font-heading font-bold text-base shrink-0 shadow-sm" style="background-color: ${client.avatarColor || 'var(--color-primary)'}">
+                                                ${initials}
+                                            </div>
+                                            <div class="min-w-0">
+                                                <h3 class="font-heading font-bold text-base text-theme-text truncate">${escapeHtml(client.name)}</h3>
+                                                <p class="text-xs text-theme-muted truncate flex items-center gap-1 mt-0.5">
+                                                    <i class="ph-fill ph-target text-theme-primary"></i> ${escapeHtml(client.goal)}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-1.5 shrink-0">
+                                            <button onclick="event.stopPropagation(); startQuickWorkoutForClient('${client.id}')" class="w-9 h-9 rounded-xl bg-theme-primarySoft text-theme-primaryDark hover:bg-theme-primary hover:text-white flex items-center justify-center transition-all" title="Edzés indítása">
+                                                <i class="ph-bold ph-play text-base"></i>
+                                            </button>
+                                            <i class="ph ph-caret-right text-theme-muted text-lg"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-3 pt-3 border-t border-theme-border/80 flex items-center justify-between text-[11px] text-theme-muted">
+                                        <span>Testsúly: <strong class="text-theme-text">${client.weight} kg</strong> • ${client.age} év</span>
+                                        <span>
+                                            ${lastWorkout 
+                                                ? `Utolsó edzés: <strong class="text-theme-primaryDark">${formatDateHu(lastWorkout.date)}</strong>` 
+                                                : 'Még nincs edzés'}
+                                        </span>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function openClientProfile(clientId) {
+            viewingClientId = clientId;
+            clientProfileTab = 'history';
+            renderCurrentView();
+        }
+
+        function startQuickWorkoutForClient(clientId) {
+            selectedWorkoutClientId = clientId;
+            switchTab('workout');
+        }
+
+        /**
+         * VENDÉG RÉSZLETES PROFIL NÉZET (3 al-fül: Edzéselőzmények | Haladás & Fotók | Méretek)
+         */
+        function renderClientProfileView(container, clientId) {
+            const client = appData.clients.find(c => c.id === clientId);
+            if (!client) {
+                viewingClientId = null;
+                renderCurrentView();
+                return;
+            }
+
+            const initials = getInitials(client.name);
+            const workouts = appData.workoutHistory
+                .filter(w => w.clientId === client.id)
+                .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            container.innerHTML = `
+                <div class="animate-view space-y-4">
+                    <!-- Vissza gomb és Edzés indítás -->
+                    <div class="flex items-center justify-between">
+                        <button onclick="viewingClientId=null; renderCurrentView()" class="flex items-center gap-1.5 text-xs font-bold text-theme-muted hover:text-theme-text py-1">
+                            <i class="ph-bold ph-arrow-left text-base"></i> Vissza a vendégekhez
+                        </button>
+                        <button onclick="startQuickWorkoutForClient('${client.id}')" class="px-3.5 py-2 bg-theme-primary text-white font-heading font-bold text-xs rounded-2xl shadow-card flex items-center gap-1.5">
+                            <i class="ph-bold ph-play"></i> Edzés indítása
+                        </button>
+                    </div>
+
+                    <!-- Vendég Fejléc Kártya -->
+                    <div class="bg-theme-card rounded-3xl p-4 shadow-soft border border-theme-border">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="flex items-center gap-3.5">
+                                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-heading font-bold text-xl shrink-0" style="background-color: ${client.avatarColor || 'var(--color-primary)'}">
+                                    ${initials}
+                                </div>
+                                <div>
+                                    <h2 class="font-heading font-bold text-lg text-theme-text">${escapeHtml(client.name)}</h2>
+                                    <p class="text-xs text-theme-muted">${escapeHtml(client.goal)}</p>
+                                    <p class="text-[11px] font-semibold text-theme-primaryDark mt-1">${client.age} év • ${client.weight} kg • ${workouts.length} edzés</p>
+                                </div>
+                            </div>
+                            <button onclick="openEditClientModal('${client.id}')" class="w-9 h-9 rounded-xl bg-theme-subtle text-theme-text flex items-center justify-center hover:bg-theme-primarySoft transition-all" title="Adatok szerkesztése">
+                                <i class="ph-bold ph-pencil-simple text-base"></i>
+                            </button>
+                        </div>
+
+                        ${client.notes ? `
+                            <div class="mt-3 p-3 rounded-2xl bg-theme-accentSoft text-xs text-theme-text flex items-start gap-2">
+                                <i class="ph-fill ph-first-aid-kit text-theme-primaryDark text-base shrink-0 mt-0.5"></i>
+                                <span>${escapeHtml(client.notes)}</span>
+                            </div>
+                        ` : ''}
+                    </div>
+
+                    <!-- 3 Al-fül választó -->
+                    <div class="grid grid-cols-3 gap-1.5 bg-theme-subtle p-1.5 rounded-2xl">
+                        <button onclick="clientProfileTab='history'; renderCurrentView()" class="py-2 rounded-xl text-xs font-heading font-bold transition-all ${clientProfileTab === 'history' ? 'bg-theme-card text-theme-text shadow-sm' : 'text-theme-muted'}">
+                            Edzések (${workouts.length})
+                        </button>
+                        <button onclick="clientProfileTab='photos'; renderCurrentView()" class="py-2 rounded-xl text-xs font-heading font-bold transition-all ${clientProfileTab === 'photos' ? 'bg-theme-card text-theme-text shadow-sm' : 'text-theme-muted'}">
+                            Fotók (${(client.photos || []).length})
+                        </button>
+                        <button onclick="clientProfileTab='measurements'; renderCurrentView()" class="py-2 rounded-xl text-xs font-heading font-bold transition-all ${clientProfileTab === 'measurements' ? 'bg-theme-card text-theme-text shadow-sm' : 'text-theme-muted'}">
+                            Méretek
+                        </button>
+                    </div>
+
+                    <!-- Al-fül tartalom -->
+                    <div id="client-subtab-content">
+                        ${clientProfileTab === 'history' ? renderClientHistorySubtab(workouts) : ''}
+                        ${clientProfileTab === 'photos' ? renderClientPhotosSubtab(client) : ''}
+                        ${clientProfileTab === 'measurements' ? renderClientMeasurementsSubtab(client) : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderClientHistorySubtab(workouts) {
+            if (workouts.length === 0) {
+                return `
+                    <div class="bg-theme-card rounded-3xl p-8 text-center border border-theme-border">
+                        <i class="ph ph-barbell text-3xl text-theme-muted mb-2"></i>
+                        <p class="font-heading font-bold text-sm">Még nincs rögzített edzés</p>
+                        <p class="text-xs text-theme-muted mt-1">Indíts egy edzést az Edzés fülön!</p>
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="space-y-3">
+                    ${workouts.map(w => `
+                        <div class="bg-theme-card rounded-3xl p-4 shadow-card border border-theme-border space-y-3">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <h4 class="font-heading font-bold text-sm text-theme-text">${escapeHtml(w.title)}</h4>
+                                    <p class="text-[11px] text-theme-muted mt-0.5">${formatDateHu(w.date)} • ${formatDuration(w.durationSeconds)}</p>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                    ${w.prCount > 0 ? `<span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold">🏆 ${w.prCount} PR</span>` : ''}
+                                    <span class="px-2.5 py-0.5 rounded-full bg-theme-primarySoft text-theme-primaryDark text-[11px] font-bold">${w.totalVolume.toLocaleString('hu-HU')} kg</span>
+                                </div>
+                            </div>
+
+                            <div class="space-y-1.5 pt-2 border-t border-theme-border/70">
+                                ${w.exercises.map(ex => {
+                                    const exInfo = getExerciseById(ex.exerciseId);
+                                    const bestSet = ex.sets.reduce((best, s) => (s.weight > (best?.weight || -1) ? s : best), null);
+                                    return `
+                                        <div class="flex items-center justify-between text-xs">
+                                            <span class="font-medium text-theme-text truncate pr-2">${ex.sets.length} × ${escapeHtml(exInfo.name)}</span>
+                                            <span class="text-theme-muted font-mono text-[11px] shrink-0">
+                                                ${bestSet ? `Max: ${bestSet.weight} kg × ${bestSet.reps}` : ''}
+                                            </span>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function renderClientPhotosSubtab(client) {
+            const photos = (client.photos || []).slice().sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            return `
+                <div class="space-y-3">
+                    <button onclick="openUploadClientPhotoModal('${client.id}')" class="w-full py-3.5 bg-theme-primary text-white font-heading font-bold text-xs rounded-2xl shadow-card flex items-center justify-center gap-2 hover:bg-theme-primaryDark transition-all">
+                        <i class="ph-bold ph-camera-plus text-base"></i> Új állapotfotó feltöltése
+                    </button>
+
+                    ${photos.length === 0 ? `
+                        <div class="bg-theme-card rounded-3xl p-8 text-center border border-theme-border">
+                            <i class="ph ph-camera text-3xl text-theme-muted mb-2"></i>
+                            <p class="font-heading font-bold text-sm">Még nincs állapotfotó</p>
+                            <p class="text-xs text-theme-muted mt-1">Tölts fel előtte/utána fotókat a vizuális fejlődés követéséhez!</p>
+                        </div>
+                    ` : `
+                        <div class="grid grid-cols-2 gap-3">
+                            ${photos.map(p => `
+                                <div onclick="openPhotoLightbox('${client.id}', '${p.id}')" class="bg-theme-card rounded-2xl overflow-hidden border border-theme-border shadow-card cursor-pointer group">
+                                    <div class="aspect-[3/4] bg-theme-subtle relative overflow-hidden">
+                                        <img src="${p.dataUrl}" alt="${escapeHtml(p.label)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                        <span class="absolute bottom-2 left-2 bg-black/65 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-0.5 rounded-lg">
+                                            ${p.weight ? p.weight + ' kg' : formatDateHu(p.date)}
+                                        </span>
+                                    </div>
+                                    <div class="p-2.5">
+                                        <p class="font-heading font-bold text-xs text-theme-text truncate">${escapeHtml(p.label)}</p>
+                                        <p class="text-[10px] text-theme-muted">${formatDateHu(p.date)}</p>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `}
+                </div>
+            `;
+        }
+
+        function renderClientMeasurementsSubtab(client) {
+            const list = (client.measurements || []).slice().sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            return `
+                <div class="space-y-3">
+                    <button onclick="openAddMeasurementModal('${client.id}')" class="w-full py-3.5 bg-theme-primary text-white font-heading font-bold text-xs rounded-2xl shadow-card flex items-center justify-center gap-2 hover:bg-theme-primaryDark transition-all">
+                        <i class="ph-bold ph-ruler text-base"></i> Új mérés rögzítése
+                    </button>
+
+                    ${list.length === 0 ? `
+                        <div class="bg-theme-card rounded-3xl p-8 text-center border border-theme-border">
+                            <p class="text-xs text-theme-muted">Még nincs rögzített körméret adat.</p>
+                        </div>
+                    ` : list.map((m, idx) => `
+                        <div class="bg-theme-card rounded-3xl p-4 border border-theme-border shadow-card">
+                            <div class="flex items-center justify-between mb-2.5">
+                                <span class="text-xs font-heading font-bold text-theme-text">${formatDateHu(m.date)}</span>
+                                <span class="px-2.5 py-0.5 rounded-full bg-theme-primarySoft text-theme-primaryDark text-xs font-bold">${m.weight} kg</span>
+                            </div>
+                            <div class="grid grid-cols-4 gap-2 text-center bg-theme-subtle/70 p-2.5 rounded-2xl text-xs">
+                                <div><span class="block text-[10px] text-theme-muted">Derék</span><strong>${m.waist || '-'} cm</strong></div>
+                                <div><span class="block text-[10px] text-theme-muted">Csípő</span><strong>${m.hips || '-'} cm</strong></div>
+                                <div><span class="block text-[10px] text-theme-muted">Kar</span><strong>${m.arm || '-'} cm</strong></div>
+                                <div><span class="block text-[10px] text-theme-muted">Comb</span><strong>${m.thigh || '-'} cm</strong></div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        /**
+         * 2. EDZÉS FÜL (HEVY LIVE WORKOUT LOGIKA)
+         */
+        function renderWorkoutTab(container) {
+            // Ha van folyamatban lévő élő edzés, azt jelenítjük meg
+            if (activeWorkout) {
+                renderActiveWorkoutSession(container);
+                return;
+            }
+
+            // Különben indító képernyő: Vendég választás + Üres edzés vagy Sablon betöltése
+            container.innerHTML = `
+                <div class="animate-view space-y-5">
+                    <div>
+                        <h2 class="font-heading font-bold text-xl text-theme-text">Edzés indítása</h2>
+                        <p class="text-xs text-theme-muted">Válassz vendéget, majd indíts üres edzést vagy tölts be sablont</p>
+                    </div>
+
+                    <!-- Vendég választó -->
+                    <div class="bg-theme-card rounded-3xl p-4 shadow-soft border border-theme-border space-y-2.5">
+                        <label class="block text-xs font-heading font-bold text-theme-text">Kinek tartod az edzést?</label>
+                        <select id="workout-client-select" onchange="selectedWorkoutClientId=this.value" class="w-full px-3.5 py-3 bg-theme-subtle rounded-2xl text-sm font-semibold text-theme-text border border-theme-border focus:outline-none focus:border-theme-primary">
+                            ${appData.clients.map(c => `<option value="${c.id}" ${c.id === selectedWorkoutClientId ? 'selected' : ''}>${escapeHtml(c.name)} (${escapeHtml(c.goal)})</option>`).join('')}
+                        </select>
+                    </div>
+
+                    <!-- Üres edzés indítása gomb -->
+                    <button onclick="startEmptyWorkout()" class="w-full py-4 bg-theme-primary text-white font-heading font-bold text-sm rounded-3xl shadow-soft hover:bg-theme-primaryDark transition-all flex items-center justify-center gap-2 active:scale-[0.99]">
+                        <i class="ph-bold ph-plus-circle text-xl"></i>
+                        <span>Üres edzés indítása</span>
+                    </button>
+
+                    <!-- Sablon betöltése (Routines) -->
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-heading font-bold text-sm text-theme-text">Gyors indítás sablonból</h3>
+                            <button onclick="switchTab('routines')" class="text-xs font-semibold text-theme-primaryDark hover:underline">Összes sablon</button>
+                        </div>
+
+                        <div class="space-y-2.5">
+                            ${appData.routines.map(r => {
+                                const exNames = r.exercises.map(item => getExerciseById(item.exerciseId).name).join(', ');
+                                return `
+                                    <div class="bg-theme-card rounded-3xl p-4 border border-theme-border shadow-card flex items-center justify-between gap-3">
+                                        <div class="min-w-0">
+                                            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-theme-primarySoft text-theme-primaryDark">${escapeHtml(r.category)}</span>
+                                            <h4 class="font-heading font-bold text-sm text-theme-text mt-1.5">${escapeHtml(r.name)}</h4>
+                                            <p class="text-xs text-theme-muted truncate mt-0.5">${escapeHtml(exNames)}</p>
+                                        </div>
+                                        <button onclick="startWorkoutFromRoutine('${r.id}')" class="px-3.5 py-2.5 bg-theme-accentSoft text-theme-text hover:bg-theme-accent font-heading font-bold text-xs rounded-2xl shrink-0 transition-all">
+                                            Indítás
+                                        </button>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function startEmptyWorkout() {
+            if (!selectedWorkoutClientId && appData.clients.length > 0) {
+                selectedWorkoutClientId = appData.clients[0].id;
+            }
+            if (!selectedWorkoutClientId) {
+                showToast('Előbb vegyél fel egy vendéget!', 'error');
+                return;
+            }
+
+            activeWorkout = {
+                clientId: selectedWorkoutClientId,
+                title: 'Egyéni edzés',
+                startTime: Date.now(),
+                elapsedSeconds: 0,
+                exercises: []
+            };
+            startWorkoutClock();
+            renderCurrentView();
+        }
+
+        function startWorkoutFromRoutine(routineId) {
+            const routine = appData.routines.find(r => r.id === routineId);
+            if (!routine) return;
+
+            if (!selectedWorkoutClientId && appData.clients.length > 0) {
+                selectedWorkoutClientId = appData.clients[0].id;
+            }
+            if (!selectedWorkoutClientId) {
+                showToast('Előbb vegyél fel egy vendéget!', 'error');
+                return;
+            }
+
+            activeWorkout = {
+                clientId: selectedWorkoutClientId,
+                title: routine.name,
+                startTime: Date.now(),
+                elapsedSeconds: 0,
+                exercises: routine.exercises.map(item => {
+                    // Előző edzésből betöltjük az ajánlott súlyokat, ha vannak
+                    const prevSets = getPreviousSetsForClientExercise(selectedWorkoutClientId, item.exerciseId);
+                    const sets = [];
+                    for (let i = 0; i < item.defaultSets; i++) {
+                        sets.push({
+                            weight: prevSets[i]?.weight ?? item.defaultWeight ?? 0,
+                            reps: prevSets[i]?.reps ?? item.defaultReps ?? 10,
+                            completed: false,
+                            isPR: false
+                        });
+                    }
+                    return {
+                        uid: 'we_' + Math.random().toString(36).slice(2, 9),
+                        exerciseId: item.exerciseId,
+                        sets
+                    };
+                })
+            };
+
+            startWorkoutClock();
+            switchTab('workout');
+        }
+
+        function startWorkoutClock() {
+            if (workoutTimerInterval) clearInterval(workoutTimerInterval);
+            updateActiveWorkoutBanner();
+            workoutTimerInterval = setInterval(() => {
+                if (!activeWorkout) return;
+                activeWorkout.elapsedSeconds = Math.floor((Date.now() - activeWorkout.startTime) / 1000);
+                const formatted = formatDuration(activeWorkout.elapsedSeconds);
+                const liveEl = document.getElementById('live-workout-clock');
+                if (liveEl) liveEl.textContent = formatted;
+                const bannerEl = document.getElementById('banner-workout-timer');
+                if (bannerEl) bannerEl.textContent = formatted;
+            }, 1000);
+        }
+
+        function updateActiveWorkoutBanner() {
+            const banner = document.getElementById('active-workout-banner');
+            if (activeWorkout && currentTab !== 'workout') {
+                const client = appData.clients.find(c => c.id === activeWorkout.clientId);
+                document.getElementById('banner-workout-info').textContent = `${client?.name || 'Vendég'} • ${activeWorkout.title}`;
+                document.getElementById('banner-workout-timer').textContent = formatDuration(activeWorkout.elapsedSeconds);
+                banner.classList.remove('hidden');
+            } else {
+                banner.classList.add('hidden');
+            }
+        }
+
+        /**
+         * AKTÍV HEVY EDZÉSNÉZET RENDERELÉSE
+         */
+        function renderActiveWorkoutSession(container) {
+            const client = appData.clients.find(c => c.id === activeWorkout.clientId);
+            const stats = calculateWorkoutStats(activeWorkout);
+
+            container.innerHTML = `
+                <div class="animate-view space-y-4">
+                    <!-- Felső Hevy Edzés Vezérlősáv -->
+                    <div class="bg-theme-card rounded-3xl p-4 shadow-soft border border-theme-border space-y-3">
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="px-2.5 py-1 rounded-full bg-theme-primarySoft text-theme-primaryDark text-xs font-bold flex items-center gap-1.5">
+                                <i class="ph-fill ph-user"></i> ${escapeHtml(client?.name || 'Vendég')}
+                            </span>
+                            <div class="flex items-center gap-2">
+                                <button onclick="confirmCancelWorkout()" class="px-3 py-1.5 rounded-xl bg-theme-subtle text-theme-muted hover:text-red-600 text-xs font-bold transition-all">
+                                    Elvetés
+                                </button>
+                                <button onclick="finishActiveWorkout()" class="px-4 py-1.5 rounded-xl bg-theme-primary text-white font-heading font-bold text-xs shadow-sm hover:bg-theme-primaryDark transition-all">
+                                    Befejezés
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Szerkeszthető edzés cím -->
+                        <input type="text" value="${escapeHtml(activeWorkout.title)}" oninput="activeWorkout.title=this.value"
+                            class="w-full font-heading font-bold text-lg text-theme-text bg-transparent border-b border-transparent focus:border-theme-primary focus:outline-none pb-0.5">
+
+                        <!-- Élő mutatók: Idő | Összvolumen | Kipipált szettek -->
+                        <div class="grid grid-cols-3 gap-2 pt-2 border-t border-theme-border/80 text-center">
+                            <div>
+                                <span class="block text-[10px] uppercase text-theme-muted font-semibold">Időtartam</span>
+                                <span id="live-workout-clock" class="font-mono font-bold text-sm text-theme-primaryDark">${formatDuration(activeWorkout.elapsedSeconds)}</span>
+                            </div>
+                            <div class="border-x border-theme-border/80">
+                                <span class="block text-[10px] uppercase text-theme-muted font-semibold">Volumen</span>
+                                <span class="font-heading font-bold text-sm text-theme-text">${stats.volume.toLocaleString('hu-HU')} kg</span>
+                            </div>
+                            <div>
+                                <span class="block text-[10px] uppercase text-theme-muted font-semibold">Szettek</span>
+                                <span class="font-heading font-bold text-sm text-theme-text">${stats.completedSets} / ${stats.totalSets}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gyakorlat Kártyák -->
+                    <div class="space-y-3.5">
+                        ${activeWorkout.exercises.length === 0 ? `
+                            <div class="bg-theme-card rounded-3xl p-8 text-center border border-dashed border-theme-primary/50">
+                                <i class="ph ph-barbell text-3xl text-theme-primary mb-2"></i>
+                                <p class="font-heading font-bold text-sm">Még nincs gyakorlat az edzésben</p>
+                                <p class="text-xs text-theme-muted mt-1">Kattints az alábbi gombra gyakorlatok hozzáadásához!</p>
+                            </div>
+                        ` : activeWorkout.exercises.map((exItem, exIdx) => {
+                            const exInfo = getExerciseById(exItem.exerciseId);
+                            const prevSets = getPreviousSetsForClientExercise(activeWorkout.clientId, exItem.exerciseId);
+                            const historicalMaxWeight = getHistoricalMaxWeight(activeWorkout.clientId, exItem.exerciseId);
+
+                            return `
+                                <div class="bg-theme-card rounded-3xl p-4 shadow-card border border-theme-border space-y-3">
+                                    <!-- Gyakorlat fejléc -->
+                                    <div class="flex items-start justify-between gap-2">
+                                        <div>
+                                            <span class="text-[10px] font-bold uppercase tracking-wider text-theme-primaryDark bg-theme-primarySoft px-2 py-0.5 rounded-md">${escapeHtml(exInfo.muscle)}</span>
+                                            <h4 class="font-heading font-bold text-base text-theme-text mt-1">${escapeHtml(exInfo.name)}</h4>
+                                        </div>
+                                        <button onclick="removeExerciseFromWorkout(${exIdx})" class="w-8 h-8 rounded-xl text-theme-muted hover:bg-red-50 hover:text-red-600 flex items-center justify-center transition-all" title="Gyakorlat törlése">
+                                            <i class="ph ph-trash text-base"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- Hevy Szett Táblázat Fejléc -->
+                                    <div class="grid grid-cols-12 gap-1.5 text-[10px] font-bold uppercase text-theme-muted text-center px-1">
+                                        <div class="col-span-2">Szett</div>
+                                        <div class="col-span-4">Előző</div>
+                                        <div class="col-span-2">Kg</div>
+                                        <div class="col-span-2">Ism.</div>
+                                        <div class="col-span-2">✔</div>
+                                    </div>
+
+                                    <!-- Szett Sorok -->
+                                    <div class="space-y-1.5">
+                                        ${exItem.sets.map((set, setIdx) => {
+                                            const prev = prevSets[setIdx];
+                                            const prevLabel = prev ? `${prev.weight} kg × ${prev.reps}` : '—';
+                                            const isPR = set.completed && set.weight > 0 && historicalMaxWeight > 0 && set.weight > historicalMaxWeight;
+
+                                            return `
+                                                <div class="grid grid-cols-12 gap-1.5 items-center p-1 rounded-2xl transition-colors ${set.completed ? 'bg-theme-primarySoft/70' : 'bg-theme-subtle/50'}">
+                                                    <!-- Szett sorszám + PR -->
+                                                    <div class="col-span-2 text-center font-heading font-bold text-xs text-theme-text flex items-center justify-center gap-0.5">
+                                                        <span>${setIdx + 1}</span>
+                                                        ${isPR ? `<span title="Új egyéni rekord (PR)!">🏆</span>` : ''}
+                                                    </div>
+
+                                                    <!-- Előző alkalom -->
+                                                    <div class="col-span-4 text-center text-[11px] text-theme-muted font-medium truncate">
+                                                        ${prevLabel}
+                                                    </div>
+
+                                                    <!-- Súly (kg) -->
+                                                    <div class="col-span-2">
+                                                        <input type="number" step="0.5" value="${set.weight}" 
+                                                            onchange="updateSetField(${exIdx}, ${setIdx}, 'weight', this.value)"
+                                                            class="w-full py-1.5 bg-theme-card border border-theme-border rounded-xl text-center text-xs font-bold text-theme-text focus:outline-none focus:border-theme-primary">
+                                                    </div>
+
+                                                    <!-- Ismétlés -->
+                                                    <div class="col-span-2">
+                                                        <input type="number" value="${set.reps}" 
+                                                            onchange="updateSetField(${exIdx}, ${setIdx}, 'reps', this.value)"
+                                                            class="w-full py-1.5 bg-theme-card border border-theme-border rounded-xl text-center text-xs font-bold text-theme-text focus:outline-none focus:border-theme-primary">
+                                                    </div>
+
+                                                    <!-- Pipa & Törlés -->
+                                                    <div class="col-span-2 flex items-center justify-center gap-1">
+                                                        <button onclick="toggleSetComplete(${exIdx}, ${setIdx})" 
+                                                            class="w-8 h-8 rounded-xl flex items-center justify-center transition-all ${
+                                                                set.completed 
+                                                                ? 'bg-theme-primary text-white shadow-sm' 
+                                                                : 'bg-theme-card border border-theme-border text-theme-muted hover:border-theme-primary'
+                                                            }">
+                                                            <i class="ph-bold ph-check text-sm"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            `;
+                                        }).join('')}
+                                    </div>
+
+                                    <!-- + Szett hozzáadása / Utolsó szett törlése -->
+                                    <div class="flex items-center justify-between pt-1">
+                                        <button onclick="addSetToExercise(${exIdx})" class="flex-1 py-2 bg-theme-subtle hover:bg-theme-primarySoft text-theme-text font-heading font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-1">
+                                            <i class="ph-bold ph-plus"></i> Szett hozzáadása
+                                        </button>
+                                        ${exItem.sets.length > 1 ? `
+                                            <button onclick="removeLastSet(${exIdx})" class="ml-2 px-3 py-2 bg-theme-subtle hover:bg-red-50 text-theme-muted hover:text-red-600 text-xs font-bold rounded-xl transition-all" title="Utolsó szett törlése">
+                                                <i class="ph-bold ph-minus"></i>
+                                            </button>
+                                        ` : ''}
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+
+                    <!-- Gyakorlat hozzáadása gomb -->
+                    <button onclick="openExercisePickerModal('workout')" class="w-full py-3.5 bg-theme-accentSoft text-theme-text hover:bg-theme-accent font-heading font-bold text-sm rounded-2xl border border-theme-border transition-all flex items-center justify-center gap-2">
+                        <i class="ph-bold ph-plus-circle text-lg"></i> Gyakorlat hozzáadása
                     </button>
                 </div>
             `;
-
-            if (client.workouts.length === 0) {
-                html += `
-                    <div class="text-center py-12 custom-card rounded-2xl p-6">
-                        <i class="fa-solid fa-dumbbell text-3xl mb-2" style="color: var(--text-muted);"></i>
-                        <p class="text-sm font-medium" style="color: var(--text-main);">Még nincs rögzített edzés ehhez a vendéghez.</p>
-                        <p class="text-xs mt-1 mb-4" style="color: var(--text-muted);">Kezdj el egy edzést sablonból vagy építsd fel most!</p>
-                        <button onclick="startNewWorkout()" class="px-4 py-2 rounded-xl text-xs font-bold btn-primary">Edzés Indítása</button>
-                    </div>
-                `;
-            } else {
-                html += `<h3 class="font-bold text-sm mb-2" style="color: var(--text-main);">Korábbi Edzések (${client.workouts.length})</h3><div class="space-y-3">`;
-                client.workouts.slice().reverse().forEach((w, wIdx) => {
-                    html += `
-                        <div class="custom-card p-4 rounded-2xl shadow-sm">
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-bold text-sm" style="color: var(--text-main);">${w.name}</span>
-                                <span class="text-xs px-2 py-0.5 rounded-md" style="background-color: var(--bg-main); color: var(--text-muted);">${w.date}</span>
-                            </div>
-                            <div class="space-y-2 mt-3">
-                    `;
-                    w.exercises.forEach(ex => {
-                        html += `
-                            <div class="text-xs bg-gray-50 dark:bg-zinc-800 p-2.5 rounded-xl border border-custom">
-                                <p class="font-semibold mb-1" style="color: var(--text-main);">${ex.name}</p>
-                                <div class="flex flex-wrap gap-1">
-                        `;
-                        ex.sets.forEach((s, sIdx) => {
-                            html += `<span class="px-2 py-1 rounded bg-white dark:bg-zinc-900 border border-custom" style="color: var(--text-muted);">#${sIdx+1}: <b>${s.kg}kg</b> × ${s.reps}ism</span>`;
-                        });
-                        html += `</div></div>`;
-                    });
-                    html += `</div></div>`;
-                });
-                html += `</div>`;
-            }
-            container.innerHTML = html;
         }
 
-        // Új edzés indítás (Sablon választó vagy üres)
-        function startNewWorkout() {
-            const client = appData.clients[appData.selectedClientIndex];
-            let templateName = prompt("Add meg az edzés nevét (vagy válaszd sablonból: Alsótest / Felsőtest):") || "Teljes Test Edzés";
-            
-            let newWorkout = {
-                date: new Date().toISOString().slice(0, 10),
-                name: templateName,
-                exercises: [
-                    { 
-                        name: "Csípőemelés (Hip Thrust)", 
-                        sets: [{ kg: 50, reps: 12, done: false }, { kg: 55, reps: 10, done: false }] 
-                    },
-                    { 
-                        name: "Bolgár egylábas guggolás", 
-                        sets: [{ kg: 10, reps: 10, done: false }] 
-                    }
-                ]
+        function updateSetField(exIdx, setIdx, field, val) {
+            if (!activeWorkout) return;
+            const num = parseFloat(val) || 0;
+            activeWorkout.exercises[exIdx].sets[setIdx][field] = num;
+            renderActiveWorkoutSession(document.getElementById('main-content'));
+        }
+
+        function toggleSetComplete(exIdx, setIdx) {
+            if (!activeWorkout) return;
+            const set = activeWorkout.exercises[exIdx].sets[setIdx];
+            set.completed = !set.completed;
+
+            // PR ellenőrzés
+            const exId = activeWorkout.exercises[exIdx].exerciseId;
+            const histMax = getHistoricalMaxWeight(activeWorkout.clientId, exId);
+            set.isPR = set.completed && set.weight > 0 && histMax > 0 && set.weight > histMax;
+
+            if (set.completed) {
+                if (set.isPR) {
+                    showToast('🏆 Új egyéni rekord (PR)!');
+                }
+                // Automatikus pihenőidő visszaszámláló indítása!
+                startRestTimer(appData.studio.defaultRestSeconds || 90);
+            }
+
+            renderActiveWorkoutSession(document.getElementById('main-content'));
+        }
+
+        function addSetToExercise(exIdx) {
+            if (!activeWorkout) return;
+            const sets = activeWorkout.exercises[exIdx].sets;
+            const lastSet = sets[sets.length - 1] || { weight: 0, reps: 10 };
+            sets.push({
+                weight: lastSet.weight,
+                reps: lastSet.reps,
+                completed: false,
+                isPR: false
+            });
+            renderActiveWorkoutSession(document.getElementById('main-content'));
+        }
+
+        function removeLastSet(exIdx) {
+            if (!activeWorkout) return;
+            const sets = activeWorkout.exercises[exIdx].sets;
+            if (sets.length > 1) {
+                sets.pop();
+                renderActiveWorkoutSession(document.getElementById('main-content'));
+            }
+        }
+
+        function removeExerciseFromWorkout(exIdx) {
+            if (!activeWorkout) return;
+            activeWorkout.exercises.splice(exIdx, 1);
+            renderActiveWorkoutSession(document.getElementById('main-content'));
+        }
+
+        function confirmCancelWorkout() {
+            openModal(`
+                <div class="space-y-4 text-center">
+                    <div class="w-12 h-12 rounded-2xl bg-red-100 text-red-600 mx-auto flex items-center justify-center">
+                        <i class="ph-bold ph-warning text-2xl"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-lg">Edzés elvetése?</h3>
+                    <p class="text-xs text-theme-muted">A jelenlegi edzés adatai nem kerülnek mentésre.</p>
+                    <div class="grid grid-cols-2 gap-3 pt-2">
+                        <button onclick="closeModal()" class="py-3 bg-theme-subtle font-bold text-xs rounded-2xl">Folytatás</button>
+                        <button onclick="cancelActiveWorkout()" class="py-3 bg-red-600 text-white font-bold text-xs rounded-2xl">Elvetés</button>
+                    </div>
+                </div>
+            `);
+        }
+
+        function cancelActiveWorkout() {
+            activeWorkout = null;
+            if (workoutTimerInterval) clearInterval(workoutTimerInterval);
+            stopRestTimer();
+            updateActiveWorkoutBanner();
+            closeModal();
+            renderCurrentView();
+        }
+
+        function finishActiveWorkout() {
+            if (!activeWorkout) return;
+            const stats = calculateWorkoutStats(activeWorkout);
+
+            // Csak a kipipált szetteket mentjük (ha egy sincs kipipálva, figyelmeztetünk)
+            const completedExercises = activeWorkout.exercises
+                .map(ex => ({
+                    exerciseId: ex.exerciseId,
+                    sets: ex.sets.filter(s => s.completed)
+                }))
+                .filter(ex => ex.sets.length > 0);
+
+            if (completedExercises.length === 0) {
+                showToast('Pipálj ki legalább egy szettet a mentéshez!', 'error');
+                return;
+            }
+
+            const today = new Date().toISOString().slice(0, 10);
+            const record = {
+                id: 'wh_' + Date.now(),
+                clientId: activeWorkout.clientId,
+                title: activeWorkout.title || 'Edzés',
+                date: today,
+                durationSeconds: activeWorkout.elapsedSeconds,
+                totalVolume: stats.volume,
+                prCount: stats.prCount,
+                exercises: completedExercises
             };
 
-            client.workouts.push(newWorkout);
-            saveToStorage();
-            renderActiveWorkoutScreen(client.workouts.length - 1);
-        }
+            appData.workoutHistory.unshift(record);
+            saveAppData();
 
-        // Élő edzés szerkesztő képernyő (Hevy nézet)
-        function renderActiveWorkoutScreen(workoutIdx) {
-            const client = appData.clients[appData.selectedClientIndex];
-            const workout = client.workouts[workoutIdx];
+            const client = appData.clients.find(c => c.id === activeWorkout.clientId);
+            activeWorkout = null;
+            if (workoutTimerInterval) clearInterval(workoutTimerInterval);
+            stopRestTimer();
+            updateActiveWorkoutBanner();
 
-            let html = `
-                <div class="flex justify-between items-center mb-3">
-                    <button onclick="renderApp()" class="text-xs font-semibold px-3 py-1.5 rounded-xl custom-card"><i class="fa-solid fa-arrow-left mr-1"></i> Mentés & Vissza</button>
-                    <h2 class="font-bold text-sm" style="color: var(--text-main);">${workout.name}</h2>
-                    <button onclick="addExerciseToWorkout(${workoutIdx})" class="px-3 py-1.5 rounded-xl text-xs font-bold btn-primary"><i class="fa-solid fa-plus"></i> Gyakorlat</button>
+            // Gratuláló összegző modál
+            openModal(`
+                <div class="space-y-4 text-center py-2">
+                    <div class="w-16 h-16 rounded-3xl bg-theme-primarySoft text-theme-primaryDark mx-auto flex items-center justify-center shadow-sm">
+                        <i class="ph-fill ph-trophy text-3xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-wider text-theme-primaryDark">Edzés elmentve!</p>
+                        <h3 class="font-heading font-bold text-xl text-theme-text mt-1">Szép munka, ${escapeHtml(client?.name || '')}!</h3>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-2 bg-theme-card p-3.5 rounded-2xl border border-theme-border">
+                        <div>
+                            <span class="block text-[10px] text-theme-muted">Időtartam</span>
+                            <strong class="font-heading text-sm">${formatDuration(record.durationSeconds)}</strong>
+                        </div>
+                        <div class="border-x border-theme-border">
+                            <span class="block text-[10px] text-theme-muted">Összvolumen</span>
+                            <strong class="font-heading text-sm">${record.totalVolume.toLocaleString('hu-HU')} kg</strong>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] text-theme-muted">Új Rekord</span>
+                            <strong class="font-heading text-sm">${record.prCount} 🏆</strong>
+                        </div>
+                    </div>
+
+                    <button onclick="closeModal(); openClientProfile('${record.clientId}')" class="w-full py-3.5 bg-theme-primary text-white font-heading font-bold text-sm rounded-2xl shadow-card">
+                        Vendég profiljának megtekintése
+                    </button>
                 </div>
-                <div class="space-y-4">
-            `;
+            `);
 
-            workout.exercises.forEach((ex, exIdx) => {
-                html += `
-                    <div class="custom-card p-4 rounded-2xl shadow-sm border border-custom">
-                        <div class="flex justify-between items-center mb-3">
-                            <h4 class="font-bold text-sm" style="color: var(--text-main);">${ex.name}</h4>
-                            <button onclick="addSetToExercise(${workoutIdx}, ${exIdx})" class="text-xs font-semibold px-2 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800" style="color: var(--primary);">+ Szett</button>
-                        </div>
-                        <div class="space-y-2">
-                            <div class="grid grid-cols-12 text-[10px] font-semibold text-center uppercase" style="color: var(--text-muted);">
-                                <span class="col-span-2">Szett</span>
-                                <span class="col-span-4">Súly (kg)</span>
-                                <span class="col-span-4">Ismétlés</span>
-                                <span class="col-span-2">✔</span>
-                            </div>
-                `;
-                ex.sets.forEach((set, setIdx) => {
-                    html += `
-                        <div class="grid grid-cols-12 gap-1 items-center">
-                            <span class="col-span-2 text-xs text-center font-bold" style="color: var(--text-muted);">#${setIdx+1}</span>
-                            <input type="number" value="${set.kg}" onchange="updateSetData(${workoutIdx}, ${exIdx}, ${setIdx}, 'kg', this.value)" class="col-span-4 p-1.5 text-center text-xs rounded-xl custom-card border border-custom font-bold" style="color: var(--text-main);">
-                            <input type="number" value="${set.reps}" onchange="updateSetData(${workoutIdx}, ${exIdx}, ${setIdx}, 'reps', this.value)" class="col-span-4 p-1.5 text-center text-xs rounded-xl custom-card border border-custom font-bold" style="color: var(--text-main);">
-                            <button onclick="toggleSetDone(${workoutIdx}, ${exIdx}, ${setIdx})" class="col-span-2 h-8 rounded-xl flex items-center justify-center font-bold ${set.done ? 'btn-primary' : 'custom-card border border-custom'}">
-                                <i class="fa-solid fa-check ${set.done ? 'text-white' : 'text-gray-400'}"></i>
-                            </button>
-                        </div>
-                    `;
-                });
-                html += `</div></div>`;
-            });
-            html += `</div>`;
-            document.getElementById('main-content').innerHTML = html;
+            renderCurrentView();
         }
 
-        function addSetToExercise(wIdx, exIdx) {
-            const client = appData.clients[appData.selectedClientIndex];
-            const lastSet = client.workouts[wIdx].exercises[exIdx].sets.slice(-1)[0] || { kg: 20, reps: 10 };
-            client.workouts[wIdx].exercises[exIdx].sets.push({ kg: lastSet.kg, reps: lastSet.reps, done: false });
-            saveToStorage();
-            renderActiveWorkoutScreen(wIdx);
-        }
+        /**
+         * PIHENŐIDŐ VISSZASZÁMLÁLÓ (REST TIMER + WEB AUDIO CSIPOGÁS)
+         */
+        function startRestTimer(seconds) {
+            if (restTimerInterval) clearInterval(restTimerInterval);
+            restTotalSeconds = seconds;
+            restRemainingSeconds = seconds;
 
-        function updateSetData(wIdx, exIdx, setIdx, field, val) {
-            const client = appData.clients[appData.selectedClientIndex];
-            client.workouts[wIdx].exercises[exIdx].sets[setIdx][field] = parseFloat(val) || 0;
-            saveToStorage();
-        }
-
-        function toggleSetDone(wIdx, exIdx, setIdx) {
-            const client = appData.clients[appData.selectedClientIndex];
-            const set = client.workouts[wIdx].exercises[exIdx].sets[setIdx];
-            set.done = !set.done;
-            saveToStorage();
-            if (set.done) triggerRestTimer(90); // 90 másodperc pihenő
-            renderActiveWorkoutScreen(wIdx);
-        }
-
-        function addExerciseToWorkout(wIdx) {
-            const exName = prompt("Add meg a gyakorlat nevét (pl. Fekvenyomás):") || "Új gyakorlat";
-            const client = appData.clients[appData.selectedClientIndex];
-            client.workouts[wIdx].exercises.push({
-                name: exName,
-                sets: [{ kg: 20, reps: 10, done: false }]
-            });
-            saveToStorage();
-            renderActiveWorkoutScreen(wIdx);
-        }
-
-        // --- PIHENŐIDŐ VISSZASZÁMLÁLÓ ---
-        let timerInterval = null;
-        let timeLeft = 90;
-
-        function triggerRestTimer(seconds) {
-            timeLeft = seconds;
             const bar = document.getElementById('rest-timer-bar');
             bar.classList.remove('hidden');
-            updateTimerDisplay();
+            updateRestTimerUI();
 
-            if (timerInterval) clearInterval(timerInterval);
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                updateTimerDisplay();
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    bar.classList.add('hidden');
-                    alert("Letelt a pihenőidő! Ideje a következő sorozatnak! 💪");
+            restTimerInterval = setInterval(() => {
+                restRemainingSeconds--;
+                if (restRemainingSeconds <= 0) {
+                    playBeepSound();
+                    stopRestTimer();
+                    showToast('⏰ Pihenőidő lejárt! Jöhet a következő szett.');
+                } else {
+                    updateRestTimerUI();
                 }
             }, 1000);
         }
 
-        function updateTimerDisplay() {
-            let m = Math.floor(timeLeft / 60);
-            let s = timeLeft % 60;
-            document.getElementById('timer-display').innerText = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
-        }
-
-        function adjustTimer(sec) {
-            timeLeft = Math.max(0, timeLeft + sec);
-            updateTimerDisplay();
+        function adjustRestTimer(delta) {
+            restRemainingSeconds = Math.max(5, restRemainingSeconds + delta);
+            restTotalSeconds = Math.max(restTotalSeconds, restRemainingSeconds);
+            updateRestTimerUI();
         }
 
         function stopRestTimer() {
-            if (timerInterval) clearInterval(timerInterval);
+            if (restTimerInterval) clearInterval(restTimerInterval);
             document.getElementById('rest-timer-bar').classList.add('hidden');
         }
 
-        // --- 3. HALADÁS & KÉPES KÖVETÉS FÜL ---
-        function renderProgressTab(container) {
-            const client = appData.clients[appData.selectedClientIndex];
-            if (!client) {
-                container.innerHTML = `<p class="text-center text-sm py-10" style="color: var(--text-muted);">Válassz vendéget!</p>`;
-                return;
-            }
+        function updateRestTimerUI() {
+            const mins = Math.floor(restRemainingSeconds / 60);
+            const secs = restRemainingSeconds % 60;
+            document.getElementById('rest-timer-display').textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+            const pct = Math.min(100, Math.round((restRemainingSeconds / restTotalSeconds) * 100));
+            document.getElementById('rest-timer-progress').style.width = `${pct}%`;
+        }
 
-            let html = `
-                <div class="custom-card p-4 rounded-2xl shadow-sm mb-4">
-                    <h2 class="font-bold text-base mb-1" style="color: var(--text-main);">${client.name} - Haladás & Fotók</h2>
-                    <p class="text-xs mb-3" style="color: var(--text-muted);">Előtte / utána fotók és testméretek követése.</p>
-                    <button onclick="openPhotoUploadModal()" class="px-4 py-2 rounded-xl text-xs font-bold btn-primary shadow-sm">
-                        <i class="fa-solid fa-camera mr-1"></i> Új Fotó / Bejegyzés
-                    </button>
-                </div>
-            `;
+        function playBeepSound() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(880, ctx.currentTime);
+                gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.45);
+            } catch (e) { /* Audio tiltva böngészőben */ }
+        }
 
-            if (client.photos.length === 0) {
-                html += `<div class="text-center py-12 custom-card rounded-2xl p-6"><p class="text-xs" style="color: var(--text-muted);">Még nincsenek feltöltött fotók.</p></div>`;
-            } else {
-                html += `<div class="space-y-3">`;
-                client.photos.forEach(p => {
-                    html += `
-                        <div class="custom-card p-4 rounded-2xl shadow-sm">
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-bold text-xs" style="color: var(--text-main);">${p.date}</span>
-                                <span class="text-xs" style="color: var(--text-muted);">${p.note}</span>
+        /**
+         * 3. SABLONOK ÉS GYAKORLATOK FÜL (Routines & Exercises)
+         */
+        function renderRoutinesTab(container) {
+            const muscles = ['Összes', 'Mell', 'Hát', 'Láb & Far', 'Váll', 'Kar', 'Törzs'];
+            const filteredExercises = appData.exercises.filter(ex =>
+                exerciseMuscleFilter === 'Összes' || ex.muscle === exerciseMuscleFilter
+            );
+
+            container.innerHTML = `
+                <div class="animate-view space-y-4">
+                    <!-- Al-fül választó -->
+                    <div class="grid grid-cols-2 gap-1.5 bg-theme-subtle p-1.5 rounded-2xl">
+                        <button onclick="routinesSubTab='routines'; renderCurrentView()" class="py-2.5 rounded-xl text-xs font-heading font-bold transition-all ${routinesSubTab === 'routines' ? 'bg-theme-card text-theme-text shadow-sm' : 'text-theme-muted'}">
+                            Edzésterv sablonok (${appData.routines.length})
+                        </button>
+                        <button onclick="routinesSubTab='exercises'; renderCurrentView()" class="py-2.5 rounded-xl text-xs font-heading font-bold transition-all ${routinesSubTab === 'exercises' ? 'bg-theme-card text-theme-text shadow-sm' : 'text-theme-muted'}">
+                            Gyakorlattár (${appData.exercises.length})
+                        </button>
+                    </div>
+
+                    ${routinesSubTab === 'routines' ? `
+                        <div class="space-y-3">
+                            <button onclick="openNewRoutineModal()" class="w-full py-3.5 bg-theme-primary text-white font-heading font-bold text-xs rounded-2xl shadow-card flex items-center justify-center gap-1.5 hover:bg-theme-primaryDark transition-all">
+                                <i class="ph-bold ph-plus text-base"></i> Új edzésterv sablon létrehozása
+                            </button>
+
+                            ${appData.routines.map(r => `
+                                <div class="bg-theme-card rounded-3xl p-4 shadow-card border border-theme-border space-y-3">
+                                    <div class="flex items-start justify-between">
+                                        <div>
+                                            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-theme-primarySoft text-theme-primaryDark">${escapeHtml(r.category)}</span>
+                                            <h3 class="font-heading font-bold text-base text-theme-text mt-1">${escapeHtml(r.name)}</h3>
+                                        </div>
+                                        <button onclick="deleteRoutine('${r.id}')" class="text-theme-muted hover:text-red-600 p-1"><i class="ph ph-trash text-base"></i></button>
+                                    </div>
+
+                                    <div class="bg-theme-subtle/60 rounded-2xl p-3 space-y-1.5">
+                                        ${r.exercises.map(item => {
+                                            const info = getExerciseById(item.exerciseId);
+                                            return `
+                                                <div class="flex items-center justify-between text-xs">
+                                                    <span class="font-medium text-theme-text">${escapeHtml(info.name)}</span>
+                                                    <span class="text-theme-muted font-mono">${item.defaultSets} × ${item.defaultReps}</span>
+                                                </div>
+                                            `;
+                                        }).join('')}
+                                    </div>
+
+                                    <button onclick="startWorkoutFromRoutine('${r.id}')" class="w-full py-2.5 bg-theme-accentSoft hover:bg-theme-accent text-theme-text font-heading font-bold text-xs rounded-2xl transition-all flex items-center justify-center gap-1.5">
+                                        <i class="ph-bold ph-play"></i> Sablon indítása vendéggel
+                                    </button>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : `
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <p class="text-xs text-theme-muted">Szűrés izomcsoportra:</p>
+                                <button onclick="openNewExerciseModal()" class="px-3 py-1.5 bg-theme-primary text-white font-heading font-bold text-xs rounded-xl flex items-center gap-1">
+                                    <i class="ph-bold ph-plus"></i> Új gyakorlat
+                                </button>
                             </div>
-                            <div class="grid grid-cols-2 gap-2 mt-2">
-                                <div class="bg-gray-100 dark:bg-zinc-800 rounded-xl p-2 text-center text-xs h-32 flex items-center justify-center border border-custom">
-                                    ${p.before ? `<img src="${p.before}" class="h-full object-cover rounded-lg">` : '<span style="color: var(--text-muted);">Nincs kép</span>'}
-                                </div>
-                                <div class="bg-gray-100 dark:bg-zinc-800 rounded-xl p-2 text-center text-xs h-32 flex items-center justify-center border border-custom">
-                                    ${p.after ? `<img src="${p.after}" class="h-full object-cover rounded-lg">` : '<span style="color: var(--text-muted);">Nincs kép</span>'}
-                                </div>
+
+                            <!-- Izomcsoport chipek -->
+                            <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1">
+                                ${muscles.map(m => `
+                                    <button onclick="exerciseMuscleFilter='${m}'; renderCurrentView()" class="px-3 py-1.5 rounded-full text-xs font-semibold shrink-0 transition-all ${exerciseMuscleFilter === m ? 'bg-theme-text text-white' : 'bg-theme-card text-theme-muted border border-theme-border'}">
+                                        ${m}
+                                    </button>
+                                `).join('')}
+                            </div>
+
+                            <!-- Gyakorlatok listája -->
+                            <div class="space-y-2">
+                                ${filteredExercises.map(ex => `
+                                    <div class="bg-theme-card rounded-2xl p-3.5 border border-theme-border flex items-center justify-between">
+                                        <div>
+                                            <h4 class="font-heading font-bold text-sm text-theme-text">${escapeHtml(ex.name)}</h4>
+                                            <span class="text-[11px] text-theme-primaryDark font-medium">${escapeHtml(ex.muscle)}</span>
+                                        </div>
+                                        <span class="w-8 h-8 rounded-xl bg-theme-subtle text-theme-muted flex items-center justify-center">
+                                            <i class="ph-bold ph-barbell"></i>
+                                        </span>
+                                    </div>
+                                `).join('')}
                             </div>
                         </div>
-                    `;
-                });
-                html += `</div>`;
-            }
-            container.innerHTML = html;
+                    `}
+                </div>
+            `;
         }
 
-        function openPhotoUploadModal() {
-            const client = appData.clients[appData.selectedClientIndex];
-            const note = prompt("Megjegyzés (pl. 3 hónapos kontroll):") || "Állapotfotó";
-            
-            // Egyszerű fájl input generálás base64-hez
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'image/*';
-            input.onchange = e => {
-                const file = e.target.files[0];
-                const reader = new FileReader();
-                reader.onload = event => {
-                    client.photos.push({
-                        date: new Date().toISOString().slice(0, 10),
-                        before: event.target.result,
-                        after: "",
-                        note: note
-                    });
-                    saveToStorage();
-                    renderApp();
-                };
-                reader.readAsDataURL(file);
-            };
-            input.click();
+        function deleteRoutine(id) {
+            appData.routines = appData.routines.filter(r => r.id !== id);
+            saveAppData();
+            renderCurrentView();
+            showToast('Sablon törölve');
         }
 
-        // --- 4. STÚDIÓ & PWA BEÁLLÍTÁSOK FÜL ---
+        /**
+         * 4. STÚDIÓ FÜL (Témaválasztó, White-label, Adatmentés)
+         */
         function renderStudioTab(container) {
             container.innerHTML = `
-                <div class="space-y-4">
-                    <!-- Stúdió adatok -->
-                    <div class="custom-card p-4 rounded-2xl shadow-sm">
-                        <h3 class="font-bold text-sm mb-3" style="color: var(--text-main);"><i class="fa-solid fa-sliders mr-1 text-primary-custom"></i> Stúdió Beállítások</h3>
-                        <div class="space-y-3 text-xs">
+                <div class="animate-view space-y-5">
+                    <div>
+                        <h2 class="font-heading font-bold text-xl text-theme-text">Stúdió & Megjelenés</h2>
+                        <p class="text-xs text-theme-muted">Színtémák, saját márkajelzés és biztonsági mentés</p>
+                    </div>
+
+                    <!-- Változtatható Pasztell Témák -->
+                    <div class="bg-theme-card rounded-3xl p-4 shadow-soft border border-theme-border space-y-3">
+                        <div class="flex items-center gap-2">
+                            <i class="ph-fill ph-palette text-theme-primary text-lg"></i>
+                            <h3 class="font-heading font-bold text-sm text-theme-text">Pasztell színtéma választása</h3>
+                        </div>
+
+                        <div class="grid grid-cols-1 gap-2.5">
+                            ${Object.values(THEMES).map(t => {
+                                const isSelected = appData.studio.theme === t.id;
+                                return `
+                                    <button onclick="selectTheme('${t.id}')" class="p-3 rounded-2xl border text-left transition-all flex items-center justify-between ${isSelected ? 'border-theme-primary bg-theme-primarySoft/60 ring-1 ring-theme-primary' : 'border-theme-border bg-theme-bg hover:border-theme-primary/50'}">
+                                        <div>
+                                            <p class="font-heading font-bold text-xs text-theme-text">${t.name}</p>
+                                            <p class="text-[11px] text-theme-muted">${t.desc}</p>
+                                        </div>
+                                        <div class="flex items-center gap-1.5">
+                                            ${t.swatches.map(hex => `<span class="w-5 h-5 rounded-full border border-black/10 shadow-xs" style="background-color: ${hex}"></span>`).join('')}
+                                        </div>
+                                    </button>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+
+                    <!-- White-label Stúdió Beállítások -->
+                    <div class="bg-theme-card rounded-3xl p-4 shadow-soft border border-theme-border space-y-3">
+                        <div class="flex items-center gap-2">
+                            <i class="ph-fill ph-storefront text-theme-primary text-lg"></i>
+                            <h3 class="font-heading font-bold text-sm text-theme-text">Márka & Edzés beállítások</h3>
+                        </div>
+
+                        <div class="space-y-3">
                             <div>
-                                <label class="block font-medium mb-1" style="color: var(--text-muted);">Stúdió Neve:</label>
-                                <input type="text" id="setting-studio-name" value="${appData.studioName}" onchange="updateStudioSetting('studioName', this.value)" class="w-full p-2 rounded-xl custom-card border border-custom font-bold" style="color: var(--text-main);">
+                                <label class="block text-xs font-medium text-theme-muted mb-1">Stúdió / Edző neve a fejlécben</label>
+                                <input type="text" id="studio-title-input" value="${escapeHtml(appData.studio.title)}" class="w-full px-3.5 py-2.5 bg-theme-bg rounded-2xl text-sm border border-theme-border focus:outline-none focus:border-theme-primary">
                             </div>
                             <div>
-                                <label class="block font-medium mb-1" style="color: var(--text-muted);">Edző Neve:</label>
-                                <input type="text" id="setting-trainer-name" value="${appData.trainerName}" onchange="updateStudioSetting('trainerName', this.value)" class="w-full p-2 rounded-xl custom-card border border-custom font-bold" style="color: var(--text-main);">
+                                <label class="block text-xs font-medium text-theme-muted mb-1">Alcím</label>
+                                <input type="text" id="studio-sub-input" value="${escapeHtml(appData.studio.subtitle)}" class="w-full px-3.5 py-2.5 bg-theme-bg rounded-2xl text-sm border border-theme-border focus:outline-none focus:border-theme-primary">
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Téma Választó Kártya -->
-                    <div class="custom-card p-4 rounded-2xl shadow-sm">
-                        <h3 class="font-bold text-sm mb-3" style="color: var(--text-main);"><i class="fa-solid fa-palette mr-1 text-primary-custom"></i> Pasztell Témák</h3>
-                        <div class="grid grid-cols-2 gap-2">
-                            <button onclick="setTheme('theme-zsalyag')" class="p-3 rounded-xl text-xs font-bold border text-left flex items-center gap-2 ${appData.theme === 'theme-zsalyag' ? 'ring-2' : ''}" style="border-color: #8DA399;">
-                                <span class="w-4 h-4 rounded-full bg-[#8DA399]"></span> Zsálya & Barack
-                            </button>
-                            <button onclick="setTheme('theme-puder')" class="p-3 rounded-xl text-xs font-bold border text-left flex items-center gap-2 ${appData.theme === 'theme-puder' ? 'ring-2' : ''}" style="border-color: #D4A5B8;">
-                                <span class="w-4 h-4 rounded-full bg-[#D4A5B8]"></span> Púder & Mályva
-                            </button>
-                            <button onclick="setTheme('theme-pala')" class="p-3 rounded-xl text-xs font-bold border text-left flex items-center gap-2 ${appData.theme === 'theme-pala' ? 'ring-2' : ''}" style="border-color: #5A738E;">
-                                <span class="w-4 h-4 rounded-full bg-[#5A738E]"></span> Pala & Szürke
-                            </button>
-                            <button onclick="setTheme('theme-homok')" class="p-3 rounded-xl text-xs font-bold border text-left flex items-center gap-2 ${appData.theme === 'theme-homok' ? 'ring-2' : ''}" style="border-color: #C28E6F;">
-                                <span class="w-4 h-4 rounded-full bg-[#C28E6F]"></span> Homok & Meleg
+                            <div>
+                                <label class="block text-xs font-medium text-theme-muted mb-1">Alapértelmezett pihenőidő (másodperc)</label>
+                                <select id="studio-rest-input" class="w-full px-3.5 py-2.5 bg-theme-bg rounded-2xl text-sm border border-theme-border">
+                                    <option value="60" ${appData.studio.defaultRestSeconds == 60 ? 'selected' : ''}>60 másodperc (1:00)</option>
+                                    <option value="90" ${appData.studio.defaultRestSeconds == 90 ? 'selected' : ''}>90 másodperc (1:30)</option>
+                                    <option value="120" ${appData.studio.defaultRestSeconds == 120 ? 'selected' : ''}>120 másodperc (2:00)</option>
+                                    <option value="180" ${appData.studio.defaultRestSeconds == 180 ? 'selected' : ''}>180 másodperc (3:00)</option>
+                                </select>
+                            </div>
+                            <button onclick="saveStudioSettings()" class="w-full py-3 bg-theme-primary text-white font-heading font-bold text-xs rounded-2xl shadow-card hover:bg-theme-primaryDark transition-all">
+                                Beállítások mentése
                             </button>
                         </div>
                     </div>
 
-                    <!-- Mobil Telepítési Útmutató (PWA) -->
-                    <div class="custom-card p-4 rounded-2xl shadow-sm border border-custom">
-                        <h3 class="font-bold text-sm mb-2" style="color: var(--text-main);"><i class="fa-solid fa-mobile-screen-button mr-1 text-primary-custom"></i> Főképernyőre Rakás (Mobil App)</h3>
-                        <p class="text-xs mb-3" style="color: var(--text-muted);">Ha telefonon böngészöd, tedd ki a kezdőképernyőre, hogy igazi appként futhasson saját ikonnal!</p>
-                        <div class="text-xs space-y-2 bg-gray-50 dark:bg-zinc-800 p-3 rounded-xl border border-custom" style="color: var(--text-main);">
-                            <p><b> iPhone (Safari):</b> Kattintson a <i>Megosztás</i> gombra, majd válassza a <b>"Főképernyőhöz adás"</b> lehetőséget.</p>
-                            <p><b>🤖 Android (Chrome):</b> Kattintson a jobb felső <i>Menü (3 pont)</i> gombra, majd a <b>"Főképernyőre rakás"</b> vagy <b>"Alkalmazás telepítése"</b> opcióra.</p>
-                        </div>
-                    </div>
+                    <!-- Adatmentés (JSON Export / Import / Demo reset) -->
+                    <div class="bg-theme-card rounded-3xl p-4 shadow-soft border border-theme-border space-y-2.5">
+                        <h3 class="font-heading font-bold text-sm text-theme-text mb-1">Adatbázis kezelése</h3>
+                        
+                        <button onclick="exportDataJson()" class="w-full py-3 px-4 bg-theme-bg hover:bg-theme-subtle rounded-2xl border border-theme-border text-xs font-semibold flex items-center justify-between transition-all">
+                            <span class="flex items-center gap-2"><i class="ph-bold ph-download-simple text-theme-primary text-base"></i> Teljes mentés exportálása (JSON)</span>
+                            <i class="ph ph-caret-right text-theme-muted"></i>
+                        </button>
 
-                    <!-- Adatmentés / Visszaállítás -->
-                    <div class="custom-card p-4 rounded-2xl shadow-sm">
-                        <h3 class="font-bold text-sm mb-2" style="color: var(--text-main);"><i class="fa-solid fa-database mr-1"></i> Adatok Mentése / Betöltése</h3>
-                        <p class="text-xs mb-3" style="color: var(--text-muted);">Exportáld az ügyfélkört biztonsági mentésként vagy Etsy vevőknek átadáshoz.</p>
-                        <div class="flex gap-2">
-                            <button onclick="exportData()" class="flex-1 py-2 rounded-xl text-xs font-bold btn-primary">Mentés fájlba</button>
-                            <button onclick="importDataPrompt()" class="flex-1 py-2 rounded-xl text-xs font-bold custom-card border border-custom" style="color: var(--text-main);">Betöltés</button>
-                        </div>
+                        <label class="w-full py-3 px-4 bg-theme-bg hover:bg-theme-subtle rounded-2xl border border-theme-border text-xs font-semibold flex items-center justify-between transition-all cursor-pointer">
+                            <span class="flex items-center gap-2"><i class="ph-bold ph-upload-simple text-theme-primary text-base"></i> Mentés visszatöltése fájlból</span>
+                            <i class="ph ph-caret-right text-theme-muted"></i>
+                            <input type="file" accept=".json" onchange="importDataJson(event)" class="hidden">
+                        </label>
+
+                        <button onclick="openResetDemoModal()" class="w-full py-3 px-4 bg-theme-accentSoft/70 hover:bg-theme-accentSoft rounded-2xl text-xs font-semibold text-theme-text flex items-center justify-between transition-all">
+                            <span class="flex items-center gap-2"><i class="ph-bold ph-arrow-counter-clockwise text-base"></i> Minta adatok visszaállítása</span>
+                            <i class="ph ph-caret-right"></i>
+                        </button>
                     </div>
                 </div>
             `;
         }
 
-        function updateStudioSetting(field, val) {
-            appData[field] = val;
-            saveToStorage();
-            renderApp();
+        function selectTheme(themeId) {
+            appData.studio.theme = themeId;
+            saveAppData();
+            renderCurrentView();
         }
 
-        function exportData() {
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appData));
-            const dlAnchor = document.createElement('a');
-            dlAnchor.setAttribute("href", dataStr);
-            dlAnchor.setAttribute("download", "edzo_studio_adatok.json");
-            document.body.appendChild(dlAnchor);
-            dlAnchor.click();
-            dlAnchor.remove();
+        function saveStudioSettings() {
+            appData.studio.title = document.getElementById('studio-title-input').value.trim() || 'Mozgásstúdió';
+            appData.studio.subtitle = document.getElementById('studio-sub-input').value.trim() || 'Személyi Edzői Rendszer';
+            appData.studio.defaultRestSeconds = parseInt(document.getElementById('studio-rest-input').value) || 90;
+            saveAppData();
+            showToast('Stúdió beállítások elmentve!');
         }
 
-        function importDataPrompt() {
-            const jsonText = prompt("Illeszd be a mentett JSON szöveget:");
-            if (!jsonText) return;
-            try {
-                appData = JSON.parse(jsonText);
-                saveToStorage();
-                renderApp();
-                alert("Sikeres adatinportálás!");
-            } catch(e) {
-                alert("Hibás JSON formátum!");
+        function exportDataJson() {
+            const jsonStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appData, null, 2));
+            const a = document.createElement('a');
+            a.href = jsonStr;
+            a.download = `edzoi_studio_adatbazis_${new Date().toISOString().slice(0, 10)}.json`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            showToast('Adatbázis exportálva!');
+        }
+
+        function importDataJson(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const parsed = JSON.parse(e.target.result);
+                    if (parsed && parsed.clients && parsed.exercises) {
+                        appData = parsed;
+                        saveAppData();
+                        renderCurrentView();
+                        showToast('Adatbázis sikeresen betöltve!');
+                    } else {
+                        showToast('Érvénytelen fájl formátum!', 'error');
+                    }
+                } catch (err) {
+                    showToast('Hiba a fájl beolvasásakor!', 'error');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        /**
+         * MODÁLIS ABLAKOK (Új vendég, Szerkesztés, Gyakorlat választó, Fotó feltöltés, Méretek, Sablon)
+         */
+        function openModal(html) {
+            const backdrop = document.getElementById('modal-backdrop');
+            document.getElementById('modal-content').innerHTML = html;
+            backdrop.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modal-backdrop').classList.add('hidden');
+        }
+
+        document.getElementById('modal-backdrop').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // ÚJ VENDÉG MODÁL
+        function openNewClientModal() {
+            const avatarColors = ['#7C968B', '#B87D8B', '#5B7387', '#B87B5E', '#8C7AA9'];
+            openModal(`
+                <form onsubmit="submitNewClient(event)" class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-heading font-bold text-lg">Új vendég hozzáadása</h3>
+                        <button type="button" onclick="closeModal()" class="w-8 h-8 rounded-full bg-theme-subtle flex items-center justify-center"><i class="ph-bold ph-x"></i></button>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-theme-muted mb-1">Teljes név *</label>
+                        <input type="text" name="name" required placeholder="pl. Horváth Petra" class="w-full px-3.5 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-medium text-theme-muted mb-1">Életkor</label>
+                            <input type="number" name="age" value="30" class="w-full px-3.5 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-theme-muted mb-1">Testsúly (kg) *</label>
+                            <input type="number" step="0.1" name="weight" required placeholder="65.0" class="w-full px-3.5 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-theme-muted mb-1">Edzési cél *</label>
+                        <input type="text" name="goal" required placeholder="pl. Alakformálás & Erőnlét" class="w-full px-3.5 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-theme-muted mb-1.5">Avatar szín</label>
+                        <div class="flex gap-3">
+                            ${avatarColors.map((c, i) => `
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="avatarColor" value="${c}" ${i === 0 ? 'checked' : ''} class="peer hidden">
+                                    <span class="block w-8 h-8 rounded-full peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:ring-theme-text" style="background-color: ${c}"></span>
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-theme-muted mb-1">Sérülések / Egészségügyi megjegyzés</label>
+                        <textarea name="notes" rows="2" placeholder="pl. Derékfájásra figyelni..." class="w-full px-3.5 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3.5 bg-theme-primary text-white font-heading font-bold text-sm rounded-2xl shadow-card">Vendég mentése</button>
+                </form>
+            `);
+        }
+
+        function submitNewClient(e) {
+            e.preventDefault();
+            const fd = new FormData(e.target);
+            const weight = parseFloat(fd.get('weight')) || 70;
+            const today = new Date().toISOString().slice(0, 10);
+
+            const newClient = {
+                id: 'c_' + Date.now(),
+                name: fd.get('name').trim(),
+                age: parseInt(fd.get('age')) || 30,
+                goal: fd.get('goal').trim(),
+                weight,
+                notes: fd.get('notes').trim(),
+                avatarColor: fd.get('avatarColor') || '#7C968B',
+                measurements: [{ date: today, weight, waist: 0, hips: 0, arm: 0, thigh: 0 }],
+                photos: []
+            };
+
+            appData.clients.unshift(newClient);
+            saveAppData();
+            closeModal();
+            renderCurrentView();
+            showToast(`${newClient.name} hozzáadva!`);
+        }
+
+        // VENDÉG SZERKESZTÉSE MODÁL
+        function openEditClientModal(clientId) {
+            const client = appData.clients.find(c => c.id === clientId);
+            if (!client) return;
+            openModal(`
+                <form onsubmit="submitEditClient(event, '${client.id}')" class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-heading font-bold text-lg">Vendég szerkesztése</h3>
+                        <button type="button" onclick="closeModal()" class="w-8 h-8 rounded-full bg-theme-subtle flex items-center justify-center"><i class="ph-bold ph-x"></i></button>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-theme-muted mb-1">Név</label>
+                        <input type="text" name="name" value="${escapeHtml(client.name)}" required class="w-full px-3.5 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-medium text-theme-muted mb-1">Életkor</label>
+                            <input type="number" name="age" value="${client.age}" class="w-full px-3.5 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-theme-muted mb-1">Testsúly (kg)</label>
+                            <input type="number" step="0.1" name="weight" value="${client.weight}" class="w-full px-3.5 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-theme-muted mb-1">Cél</label>
+                        <input type="text" name="goal" value="${escapeHtml(client.goal)}" class="w-full px-3.5 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-theme-muted mb-1">Megjegyzés / Sérülések</label>
+                        <textarea name="notes" rows="2" class="w-full px-3.5 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border">${escapeHtml(client.notes || '')}</textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3.5 bg-theme-primary text-white font-heading font-bold text-sm rounded-2xl">Változtatások mentése</button>
+                    <button type="button" onclick="deleteClientById('${client.id}')" class="w-full py-2.5 text-red-600 text-xs font-bold">Vendég törlése</button>
+                </form>
+            `);
+        }
+
+        function submitEditClient(e, clientId) {
+            e.preventDefault();
+            const client = appData.clients.find(c => c.id === clientId);
+            if (!client) return;
+            const fd = new FormData(e.target);
+            client.name = fd.get('name').trim();
+            client.age = parseInt(fd.get('age')) || client.age;
+            client.weight = parseFloat(fd.get('weight')) || client.weight;
+            client.goal = fd.get('goal').trim();
+            client.notes = fd.get('notes').trim();
+            saveAppData();
+            closeModal();
+            renderCurrentView();
+            showToast('Vendég adatai frissítve!');
+        }
+
+        function deleteClientById(clientId) {
+            appData.clients = appData.clients.filter(c => c.id !== clientId);
+            appData.workoutHistory = appData.workoutHistory.filter(w => w.clientId !== clientId);
+            viewingClientId = null;
+            saveAppData();
+            closeModal();
+            renderCurrentView();
+            showToast('Vendég törölve');
+        }
+
+        // GYAKORLAT VÁLASZTÓ MODÁL (Aktív edzéshez vagy új sablonhoz)
+        let pickerSearch = '';
+        let pickerMuscle = 'Összes';
+
+        function openExercisePickerModal(targetMode) {
+            pickerSearch = '';
+            pickerMuscle = 'Összes';
+            renderExercisePickerContent(targetMode);
+        }
+
+        function renderExercisePickerContent(targetMode) {
+            const muscles = ['Összes', 'Mell', 'Hát', 'Láb & Far', 'Váll', 'Kar', 'Törzs'];
+            const list = appData.exercises.filter(ex => {
+                const matchM = pickerMuscle === 'Összes' || ex.muscle === pickerMuscle;
+                const matchS = ex.name.toLowerCase().includes(pickerSearch.toLowerCase());
+                return matchM && matchS;
+            });
+
+            openModal(`
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-heading font-bold text-lg">Gyakorlat választása</h3>
+                        <button onclick="closeModal()" class="w-8 h-8 rounded-full bg-theme-subtle flex items-center justify-center"><i class="ph-bold ph-x"></i></button>
+                    </div>
+
+                    <input type="text" value="${escapeHtml(pickerSearch)}" oninput="pickerSearch=this.value; renderExercisePickerContent('${targetMode}')"
+                        placeholder="Gyakorlat keresése..." class="w-full px-3.5 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border focus:outline-none">
+
+                    <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1">
+                        ${muscles.map(m => `
+                            <button onclick="pickerMuscle='${m}'; renderExercisePickerContent('${targetMode}')" class="px-3 py-1 rounded-full text-xs font-semibold shrink-0 ${pickerMuscle === m ? 'bg-theme-primary text-white' : 'bg-theme-card text-theme-muted border border-theme-border'}">
+                                ${m}
+                            </button>
+                        `).join('')}
+                    </div>
+
+                    <div class="max-h-72 overflow-y-auto space-y-1.5 pr-1">
+                        ${list.map(ex => `
+                            <button onclick="handleSelectExercise('${ex.id}', '${targetMode}')" class="w-full p-3 bg-theme-card hover:bg-theme-primarySoft rounded-2xl border border-theme-border text-left flex items-center justify-between transition-all">
+                                <div>
+                                    <p class="font-heading font-bold text-xs text-theme-text">${escapeHtml(ex.name)}</p>
+                                    <span class="text-[10px] text-theme-muted">${escapeHtml(ex.muscle)}</span>
+                                </div>
+                                <i class="ph-bold ph-plus-circle text-theme-primary text-lg"></i>
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `);
+        }
+
+        function handleSelectExercise(exerciseId, targetMode) {
+            if (targetMode === 'workout' && activeWorkout) {
+                const prevSets = getPreviousSetsForClientExercise(activeWorkout.clientId, exerciseId);
+                activeWorkout.exercises.push({
+                    uid: 'we_' + Math.random().toString(36).slice(2, 9),
+                    exerciseId,
+                    sets: [
+                        { weight: prevSets[0]?.weight ?? 0, reps: prevSets[0]?.reps ?? 10, completed: false, isPR: false },
+                        { weight: prevSets[1]?.weight ?? prevSets[0]?.weight ?? 0, reps: prevSets[1]?.reps ?? prevSets[0]?.reps ?? 10, completed: false, isPR: false },
+                        { weight: prevSets[2]?.weight ?? prevSets[0]?.weight ?? 0, reps: prevSets[2]?.reps ?? prevSets[0]?.reps ?? 10, completed: false, isPR: false }
+                    ]
+                });
+                closeModal();
+                renderCurrentView();
+            } else if (targetMode === 'routine') {
+                draftRoutineExercises.push({ exerciseId, defaultSets: 3, defaultReps: 10, defaultWeight: 0 });
+                openNewRoutineModal(true);
             }
         }
 
-        // Induláskor betöltés és render
-        loadFromStorage();
-        renderApp();
+        // ÚJ SABLON LÉTREHOZÁSA MODÁL
+        let draftRoutineName = '';
+        let draftRoutineCategory = 'Alakformálás';
+        let draftRoutineExercises = [];
+
+        function openNewRoutineModal(keepDraft = false) {
+            if (!keepDraft) {
+                draftRoutineName = '';
+                draftRoutineCategory = 'Alakformálás';
+                draftRoutineExercises = [];
+            }
+
+            openModal(`
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-heading font-bold text-lg">Új edzésterv sablon</h3>
+                        <button onclick="closeModal()" class="w-8 h-8 rounded-full bg-theme-subtle flex items-center justify-center"><i class="ph-bold ph-x"></i></button>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-theme-muted mb-1">Sablon neve *</label>
+                        <input type="text" value="${escapeHtml(draftRoutineName)}" oninput="draftRoutineName=this.value" placeholder="pl. Teljes Test A" class="w-full px-3.5 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-theme-muted mb-1">Kategória</label>
+                        <select onchange="draftRoutineCategory=this.value" class="w-full px-3.5 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border">
+                            <option value="Alakformálás" ${draftRoutineCategory==='Alakformálás'?'selected':''}>Alakformálás</option>
+                            <option value="Izomépítés" ${draftRoutineCategory==='Izomépítés'?'selected':''}>Izomépítés</option>
+                            <option value="Erőnlét" ${draftRoutineCategory==='Erőnlét'?'selected':''}>Erőnlét</option>
+                            <option value="Alapozó" ${draftRoutineCategory==='Alapozó'?'selected':''}>Alapozó</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-heading font-bold">Gyakorlatok (${draftRoutineExercises.length})</span>
+                            <button onclick="openExercisePickerModal('routine')" class="text-xs font-bold text-theme-primaryDark flex items-center gap-1">
+                                <i class="ph-bold ph-plus"></i> Gyakorlat hozzáadása
+                            </button>
+                        </div>
+
+                        <div class="space-y-2 max-h-48 overflow-y-auto">
+                            ${draftRoutineExercises.length === 0 ? `<p class="text-xs text-theme-muted text-center py-4 bg-theme-card rounded-2xl border border-theme-border">Adj hozzá gyakorlatokat a sablonhoz!</p>` :
+                            draftRoutineExercises.map((item, idx) => {
+                                const info = getExerciseById(item.exerciseId);
+                                return `
+                                    <div class="bg-theme-card p-2.5 rounded-2xl border border-theme-border flex items-center justify-between gap-2">
+                                        <span class="text-xs font-bold truncate flex-1">${escapeHtml(info.name)}</span>
+                                        <div class="flex items-center gap-1 text-xs">
+                                            <input type="number" value="${item.defaultSets}" onchange="draftRoutineExercises[${idx}].defaultSets=parseInt(this.value)||3" class="w-10 py-1 bg-theme-subtle rounded-lg text-center font-bold">
+                                            <span>×</span>
+                                            <input type="number" value="${item.defaultReps}" onchange="draftRoutineExercises[${idx}].defaultReps=parseInt(this.value)||10" class="w-10 py-1 bg-theme-subtle rounded-lg text-center font-bold">
+                                            <button onclick="draftRoutineExercises.splice(${idx},1); openNewRoutineModal(true)" class="text-red-500 ml-1"><i class="ph ph-trash"></i></button>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+
+                    <button onclick="saveNewRoutine()" class="w-full py-3.5 bg-theme-primary text-white font-heading font-bold text-sm rounded-2xl shadow-card">Sablon mentése</button>
+                </div>
+            `);
+        }
+
+        function saveNewRoutine() {
+            if (!draftRoutineName.trim()) {
+                showToast('Add meg a sablon nevét!', 'error');
+                return;
+            }
+            if (draftRoutineExercises.length === 0) {
+                showToast('Adj hozzá legalább egy gyakorlatot!', 'error');
+                return;
+            }
+            appData.routines.unshift({
+                id: 'r_' + Date.now(),
+                name: draftRoutineName.trim(),
+                category: draftRoutineCategory,
+                exercises: draftRoutineExercises
+            });
+            saveAppData();
+            closeModal();
+            renderCurrentView();
+            showToast('Új sablon elmentve!');
+        }
+
+        // ÚJ SAJÁT GYAKORLAT MODÁL
+        function openNewExerciseModal() {
+            openModal(`
+                <form onsubmit="submitNewExercise(event)" class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-heading font-bold text-lg">Új gyakorlat felvétele</h3>
+                        <button type="button" onclick="closeModal()" class="w-8 h-8 rounded-full bg-theme-subtle flex items-center justify-center"><i class="ph-bold ph-x"></i></button>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-theme-muted mb-1">Gyakorlat neve *</label>
+                        <input type="text" name="name" required placeholder="pl. Kábeles tárogatás" class="w-full px-3.5 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-theme-muted mb-1">Izomcsoport</label>
+                        <select name="muscle" class="w-full px-3.5 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border">
+                            <option value="Mell">Mell</option>
+                            <option value="Hát">Hát</option>
+                            <option value="Láb & Far">Láb & Far</option>
+                            <option value="Váll">Váll</option>
+                            <option value="Kar">Kar</option>
+                            <option value="Törzs">Törzs</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full py-3.5 bg-theme-primary text-white font-heading font-bold text-sm rounded-2xl">Gyakorlat mentése</button>
+                </form>
+            `);
+        }
+
+        function submitNewExercise(e) {
+            e.preventDefault();
+            const fd = new FormData(e.target);
+            appData.exercises.unshift({
+                id: 'ex_' + Date.now(),
+                name: fd.get('name').trim(),
+                muscle: fd.get('muscle')
+            });
+            saveAppData();
+            closeModal();
+            renderCurrentView();
+            showToast('Új gyakorlat hozzáadva!');
+        }
+
+        // ÁLLAPOTFOTÓ FELTÖLTÉSE (800px Canvas tömörítéssel)
+        function openUploadClientPhotoModal(clientId) {
+            const client = appData.clients.find(c => c.id === clientId);
+            if (!client) return;
+            const today = new Date().toISOString().slice(0, 10);
+
+            openModal(`
+                <form onsubmit="submitClientPhotoUpload(event, '${client.id}')" class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-heading font-bold text-lg">Állapotfotó feltöltése</h3>
+                        <button type="button" onclick="closeModal()" class="w-8 h-8 rounded-full bg-theme-subtle flex items-center justify-center"><i class="ph-bold ph-x"></i></button>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-medium text-theme-muted mb-1">Címke *</label>
+                            <input type="text" name="label" required placeholder="pl. 1. hét – Elölről" class="w-full px-3 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-theme-muted mb-1">Dátum *</label>
+                            <input type="date" name="date" value="${today}" required class="w-full px-3 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-theme-muted mb-1">Aktuális testsúly (kg)</label>
+                        <input type="number" step="0.1" name="weight" value="${client.weight}" class="w-full px-3.5 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-theme-muted mb-1">Fotó kiválasztása *</label>
+                        <label class="flex flex-col items-center justify-center w-full h-36 bg-theme-card border-2 border-dashed border-theme-primary/50 rounded-2xl cursor-pointer hover:bg-theme-primarySoft/30 transition-all overflow-hidden">
+                            <div id="photo-upload-placeholder" class="text-center p-4">
+                                <i class="ph-bold ph-camera-plus text-2xl text-theme-primary mb-1"></i>
+                                <p class="text-xs font-bold">Koppints a kép kiválasztásához</p>
+                                <p class="text-[10px] text-theme-muted mt-0.5">Automatikus helytakarékos tömörítés (800px)</p>
+                            </div>
+                            <img id="photo-upload-preview" class="hidden w-full h-full object-contain" alt="Előnézet">
+                            <input type="file" id="client-photo-input" accept="image/*" required onchange="previewClientPhoto(event)" class="hidden">
+                        </label>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-theme-muted mb-1">Jegyzet (opcionális)</label>
+                        <input type="text" name="note" placeholder="pl. Reggeli mérés" class="w-full px-3.5 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border">
+                    </div>
+
+                    <button type="submit" id="save-photo-btn" class="w-full py-3.5 bg-theme-primary text-white font-heading font-bold text-sm rounded-2xl shadow-card">Fotó mentése</button>
+                </form>
+            `);
+        }
+
+        function previewClientPhoto(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = ev => {
+                const img = document.getElementById('photo-upload-preview');
+                img.src = ev.target.result;
+                img.classList.remove('hidden');
+                document.getElementById('photo-upload-placeholder').classList.add('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function submitClientPhotoUpload(e, clientId) {
+            e.preventDefault();
+            const file = document.getElementById('client-photo-input').files[0];
+            if (!file) return;
+
+            const btn = document.getElementById('save-photo-btn');
+            btn.disabled = true;
+            btn.textContent = 'Kép optimalizálása...';
+
+            const fd = new FormData(e.target);
+            compressImageTo800px(file, 800, 0.8, (dataUrl) => {
+                const client = appData.clients.find(c => c.id === clientId);
+                if (!client) return;
+                if (!client.photos) client.photos = [];
+
+                client.photos.push({
+                    id: 'ph_' + Date.now(),
+                    label: fd.get('label').trim(),
+                    date: fd.get('date'),
+                    weight: parseFloat(fd.get('weight')) || client.weight,
+                    note: fd.get('note').trim(),
+                    dataUrl
+                });
+
+                saveAppData();
+                closeModal();
+                renderCurrentView();
+                showToast('Állapotfotó elmentve!');
+            });
+        }
+
+        function compressImageTo800px(file, maxWidth, quality, cb) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                const img = new Image();
+                img.onload = () => {
+                    let w = img.width;
+                    let h = img.height;
+                    if (w > maxWidth) {
+                        h = Math.round((h * maxWidth) / w);
+                        w = maxWidth;
+                    }
+                    const canvas = document.createElement('canvas');
+                    canvas.width = w;
+                    canvas.height = h;
+                    canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                    cb(canvas.toDataURL('image/jpeg', quality));
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // NAGYÍTHATÓ FOTÓ ELŐNÉZET (LIGHTBOX)
+        function openPhotoLightbox(clientId, photoId) {
+            const client = appData.clients.find(c => c.id === clientId);
+            const photo = client?.photos?.find(p => p.id === photoId);
+            if (!photo) return;
+
+            openModal(`
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="font-heading font-bold text-base">${escapeHtml(photo.label)}</h3>
+                            <p class="text-xs text-theme-muted">${formatDateHu(photo.date)} ${photo.weight ? `• ${photo.weight} kg` : ''}</p>
+                        </div>
+                        <button onclick="closeModal()" class="w-8 h-8 rounded-full bg-theme-subtle flex items-center justify-center"><i class="ph-bold ph-x"></i></button>
+                    </div>
+                    <div class="rounded-2xl overflow-hidden bg-black/5 max-h-[60vh] flex items-center justify-center">
+                        <img src="${photo.dataUrl}" alt="${escapeHtml(photo.label)}" class="max-h-[60vh] w-auto object-contain">
+                    </div>
+                    ${photo.note ? `<p class="text-xs text-theme-text bg-theme-card p-3 rounded-2xl border border-theme-border">${escapeHtml(photo.note)}</p>` : ''}
+                    <button onclick="deleteClientPhoto('${client.id}', '${photo.id}')" class="w-full py-2.5 text-red-600 text-xs font-bold">Fotó törlése</button>
+                </div>
+            `);
+        }
+
+        function deleteClientPhoto(clientId, photoId) {
+            const client = appData.clients.find(c => c.id === clientId);
+            if (!client) return;
+            client.photos = (client.photos || []).filter(p => p.id !== photoId);
+            saveAppData();
+            closeModal();
+            renderCurrentView();
+            showToast('Fotó törölve');
+        }
+
+        // ÚJ MÉRÉS RÖGZÍTÉSE MODÁL
+        function openAddMeasurementModal(clientId) {
+            const client = appData.clients.find(c => c.id === clientId);
+            if (!client) return;
+            const today = new Date().toISOString().slice(0, 10);
+
+            openModal(`
+                <form onsubmit="submitClientMeasurement(event, '${client.id}')" class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-heading font-bold text-lg">Új testmérés</h3>
+                        <button type="button" onclick="closeModal()" class="w-8 h-8 rounded-full bg-theme-subtle flex items-center justify-center"><i class="ph-bold ph-x"></i></button>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-medium text-theme-muted mb-1">Dátum</label>
+                            <input type="date" name="date" value="${today}" required class="w-full px-3 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-theme-muted mb-1">Testsúly (kg) *</label>
+                            <input type="number" step="0.1" name="weight" value="${client.weight}" required class="w-full px-3 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-medium text-theme-muted mb-1">Derék (cm)</label>
+                            <input type="number" step="0.5" name="waist" placeholder="72" class="w-full px-3 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-theme-muted mb-1">Csípő (cm)</label>
+                            <input type="number" step="0.5" name="hips" placeholder="96" class="w-full px-3 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-theme-muted mb-1">Kar (cm)</label>
+                            <input type="number" step="0.5" name="arm" placeholder="29" class="w-full px-3 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-theme-muted mb-1">Comb (cm)</label>
+                            <input type="number" step="0.5" name="thigh" placeholder="55" class="w-full px-3 py-2.5 bg-theme-card rounded-2xl text-sm border border-theme-border">
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full py-3.5 bg-theme-primary text-white font-heading font-bold text-sm rounded-2xl">Mérés mentése</button>
+                </form>
+            `);
+        }
+
+        function submitClientMeasurement(e, clientId) {
+            e.preventDefault();
+            const client = appData.clients.find(c => c.id === clientId);
+            if (!client) return;
+            const fd = new FormData(e.target);
+            const weight = parseFloat(fd.get('weight')) || client.weight;
+            client.weight = weight;
+            if (!client.measurements) client.measurements = [];
+            client.measurements.push({
+                date: fd.get('date'),
+                weight,
+                waist: parseFloat(fd.get('waist')) || 0,
+                hips: parseFloat(fd.get('hips')) || 0,
+                arm: parseFloat(fd.get('arm')) || 0,
+                thigh: parseFloat(fd.get('thigh')) || 0
+            });
+            saveAppData();
+            closeModal();
+            renderCurrentView();
+            showToast('Mérés rögzítve!');
+        }
+
+        // DEMO VISSZAÁLLÍTÁS MODÁL
+        function openResetDemoModal() {
+            openModal(`
+                <div class="space-y-4 text-center">
+                    <h3 class="font-heading font-bold text-lg">Minta adatok visszaállítása?</h3>
+                    <p class="text-xs text-theme-muted">Minden saját módosítás törlődik, és visszatöltődik a 3 minta vendég és edzéseik.</p>
+                    <div class="grid grid-cols-2 gap-3 pt-2">
+                        <button onclick="closeModal()" class="py-3 bg-theme-subtle font-bold text-xs rounded-2xl">Mégse</button>
+                        <button onclick="appData=JSON.parse(JSON.stringify(DEFAULT_DATA)); saveAppData(); closeModal(); switchTab('clients'); showToast('Minta adatok visszaállítva!');" class="py-3 bg-theme-primary text-white font-bold text-xs rounded-2xl">Visszaállítás</button>
+                    </div>
+                </div>
+            `);
+        }
+
+        /**
+         * HEVY SZÁMÍTÁSI ÉS ELŐZMÉNY SEGÉDFÜGGVÉNYEK
+         */
+        function getExerciseById(id) {
+            return appData.exercises.find(e => e.id === id) || { id, name: 'Ismeretlen gyakorlat', muscle: 'Egyéb' };
+        }
+
+        // Kikeresi a vendég legutóbbi befejezett edzéséből az adott gyakorlat szettjeit
+        function getPreviousSetsForClientExercise(clientId, exerciseId) {
+            const clientWorkouts = appData.workoutHistory
+                .filter(w => w.clientId === clientId)
+                .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            for (const w of clientWorkouts) {
+                const found = w.exercises.find(ex => ex.exerciseId === exerciseId);
+                if (found && found.sets && found.sets.length > 0) {
+                    return found.sets;
+                }
+            }
+            return [];
+        }
+
+        // Kikeresi a vendég eddigi legnagyobb súlyát az adott gyakorlatban (PR detektáláshoz)
+        function getHistoricalMaxWeight(clientId, exerciseId) {
+            let maxW = 0;
+            appData.workoutHistory
+                .filter(w => w.clientId === clientId)
+                .forEach(w => {
+                    const found = w.exercises.find(ex => ex.exerciseId === exerciseId);
+                    if (found) {
+                        found.sets.forEach(s => {
+                            if (s.weight > maxW) maxW = s.weight;
+                        });
+                    }
+                });
+            return maxW;
+        }
+
+        function calculateWorkoutStats(workout) {
+            let volume = 0;
+            let completedSets = 0;
+            let totalSets = 0;
+            let prCount = 0;
+
+            workout.exercises.forEach(ex => {
+                ex.sets.forEach(s => {
+                    totalSets++;
+                    if (s.completed) {
+                        completedSets++;
+                        volume += (s.weight || 0) * (s.reps || 0);
+                        if (s.isPR) prCount++;
+                    }
+                });
+            });
+
+            return { volume: Math.round(volume), completedSets, totalSets, prCount };
+        }
+
+        function formatDuration(sec) {
+            const s = Math.max(0, sec || 0);
+            const h = Math.floor(s / 3600);
+            const m = Math.floor((s % 3600) / 60);
+            const remS = s % 60;
+            if (h > 0) return `${h}:${String(m).padStart(2, '0')}:${String(remS).padStart(2, '0')}`;
+            return `${String(m).padStart(2, '0')}:${String(remS).padStart(2, '0')}`;
+        }
+
+        function formatDateHu(dateStr) {
+            if (!dateStr) return '';
+            const p = dateStr.split('-');
+            return p.length === 3 ? `${p[0]}.${p[1]}.${p[2]}.` : dateStr;
+        }
+
+        function getInitials(name) {
+            return (name || 'V').split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+        }
+
+        function escapeHtml(str) {
+            if (str === null || str === undefined) return '';
+            return String(str)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Indítás
+        window.addEventListener('DOMContentLoaded', () => {
+            applyTheme(appData.studio.theme);
+            updateHeaderUI();
+            switchTab('clients');
+        });
     </script>
 </body>
 </html>
